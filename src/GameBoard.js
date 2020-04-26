@@ -24,6 +24,51 @@ class GameBoard extends Component {
           number: 3,
           score: 0
         },
+        {
+          name: 'Chuy',
+          number: 4,
+          score: 0
+        },
+        {
+          name: 'Cole',
+          number: 5,
+          score: 0
+        },
+        {
+          name: 'Cortney',
+          number: 6,
+          score: 0
+        },
+        {
+          name: 'Topping',
+          number: 7,
+          score: 0
+        },
+        {
+          name: 'Kareem',
+          number: 8,
+          score: 12
+        },
+        {
+          name: 'Courtney',
+          number: 9,
+          score: 15
+        },
+        {
+          name: 'Kaci',
+          number: 10,
+          score: 0
+        },
+        {
+          name: 'Alayna',
+          number: 11,
+          score: 20
+        },
+        {
+          name: 'Cliff',
+          number: 12,
+          score: 0
+        },
       ]
     }
   }
@@ -43,9 +88,8 @@ class GameBoard extends Component {
           <h1>MAESTRO</h1>
         </Col>
         <Col xs={11}>
-          <div className="board-bg">
-          {players}
-
+          <div>
+            {players}
           </div>
         </Col>
       </Row>

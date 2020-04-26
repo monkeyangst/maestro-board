@@ -1,0 +1,68 @@
+$one-fifth: calc(100% / 5);
+$two-fifth: calc(100% / 5 * 2);
+$three-fifth: calc(100% / 5 * 3);
+$four-fifth: calc(100% / 5 * 4);
+$five-fifth: calc(100%);
+
+$one-point: calc(100% / 25);
+
+
+@mixin flooble {
+  $stripes: ();
+  $color: Red;
+  @for $i from 1 through 5 {
+    @if $i == 5 {
+      $color: #ffcc00;
+    } @else {
+      $color: #cccccc;
+    }
+    $test3: calc(#{$i} * (100% / 25) - 2px);
+    $test4: calc(#{$i} * (100% / 25));
+  
+    $stripes: append($stripes, transparent, comma);
+    $stripes: append($stripes, transparent $test3, comma);
+    $stripes: append($stripes, $color  $test4, comma);
+    $stripes: append($stripes, transparent $test4, comma);
+  }
+  background-image:
+    repeating-linear-gradient(90deg, $stripes),
+}
+
+.player-track {
+  height: 50px;
+  padding-left: 200px;
+  padding-right: 0;
+}
+
+.board-bg {
+  width: 100%;
+  height: 50px;
+  background-color: #333333;
+  @include flooble;
+  
+}
+
+
+
+
+.board-bg2 {
+  padding-left: 0;
+  background-color: purple;
+  background-image: 
+    linear-gradient(90deg, transparent, transparent 200px, Yellow 201px, transparent 202px),
+    linear-gradient(90deg, transparent, transparent 400px, Yellow 401px, transparent 402px),
+    linear-gradient(90deg, transparent, transparent 600px, Yellow 601px, transparent 602px),
+      linear-gradient(90deg, transparent, transparent 640px, White 641px, transparent 641px),
+      linear-gradient(90deg, transparent, transparent 680px, White 681px, transparent 681px),
+      linear-gradient(90deg, transparent, transparent 720px, White 721px, transparent 721px),
+      linear-gradient(90deg, transparent, transparent 760px, White 761px, transparent 761px),
+
+    linear-gradient(90deg, transparent, transparent 800px, Yellow 801px, transparent 802px),
+      linear-gradient(90deg, transparent, transparent 840px, White 841px, transparent 841px),
+      linear-gradient(90deg, transparent, transparent 880px, White 881px, transparent 881px),
+      linear-gradient(90deg, transparent, transparent 920px, White 921px, transparent 921px),
+      linear-gradient(90deg, transparent, transparent 960px, White 961px, transparent 961px),
+
+    linear-gradient(90deg, transparent, transparent 1000px, Yellow 1001px, transparent 1002px);
+}
+
