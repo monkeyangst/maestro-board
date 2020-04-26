@@ -1,0 +1,28 @@
+.player-card {
+  background-color: White;
+  min-height: 50px;
+  max-width: 200px;
+
+  color: Black;
+  line-height: 50px;
+
+}
+
+.player-number {
+  font-family: 'Titan One', Arial, Helvetica, sans-serif;
+  font-size: 1.2em;
+  line-height: 50px;
+  margin: 0 10px;
+}
+
+.player-name {
+  line-height: 50px;
+  display: inline-block;
+  height: 50px;
+  margin: auto 0;
+}
+
+.player-score {
+  margin-left: 20px;
+  color: Red;
+}
