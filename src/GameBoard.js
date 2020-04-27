@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Player from './Player';
 import {Row, Col} from 'react-bootstrap';
+import './GameBoard.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faSkullCrossbones} from '@fortawesome/free-solid-svg-icons';
 
 class GameBoard extends Component {
 
@@ -110,16 +113,17 @@ class GameBoard extends Component {
           </div>
         </Col>
         <Col xs={1}>
-        <div className="control-center">
-            <button className="btn btn-success btn-sm btn-block" onClick={() => this.addToChecked(1)}>+1</button>
-            <button className="btn btn-success btn-sm btn-block" onClick={() => this.addToChecked(2)}>+2</button>
-            <button className="btn btn-success btn-sm btn-block" onClick={() => this.addToChecked(3)}>+3</button>
-            <button className="btn btn-success btn-sm btn-block" onClick={() => this.addToChecked(4)}>+4</button>
-            <button className="btn btn-success btn-sm btn-block" onClick={() => this.addToChecked(5)}>+5</button>
+          <div className="control-center">
+            <h3>Scoring</h3>
+            <button className="btn btn-secondary btn-sm btn-block" onClick={() => this.addToChecked(1)}>1</button>
+            <button className="btn btn-secondary btn-sm btn-block" onClick={() => this.addToChecked(2)}>2</button>
+            <button className="btn btn-secondary btn-sm btn-block" onClick={() => this.addToChecked(3)}>3</button>
+            <button className="btn btn-secondary btn-sm btn-block" onClick={() => this.addToChecked(4)}>4</button>
+            <button className="btn btn-secondary btn-sm btn-block" onClick={() => this.addToChecked(5)}>5</button>
 
-            <button className="btn btn-primary btn-sm btn-block" onClick={() => this.addToChecked(-1)}>-1</button>
-            <button className="btn btn-secondary btn-sm" onClick={this.uncheckAll}>Uncheck All</button>
-            <button className="btn btn-danger btn-sm" onClick={this.eliminateChecked}>Eliminate</button>
+            <button className="btn btn-dark btn-sm btn-block" onClick={() => this.addToChecked(-1)}>-1</button>
+            <button className="btn btn-dark btn-sm" onClick={this.uncheckAll}>Uncheck All</button>
+            <button className="btn btn-danger btn-sm" onClick={this.eliminateChecked}><FontAwesomeIcon icon={faSkullCrossbones} />Eliminate</button>
           </div>
 
         </Col>
