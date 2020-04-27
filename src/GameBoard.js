@@ -14,7 +14,7 @@ class GameBoard extends Component {
       const players = [];
       for ( let i = 1; i <= 13; i++) {
         players.push({
-          name: 'Player',
+          name: '',
           number: i,
           score: 0,
           isEliminated: false,
@@ -69,7 +69,6 @@ class GameBoard extends Component {
       if ( player.isChecked && !player.isEliminated && player.score < 25 ) player.score += howMany;
       return player;
     });
-    this.uncheckAll();
     this.setState({players});
   }
 
