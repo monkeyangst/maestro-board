@@ -12,6 +12,7 @@
   border-radius: 4px;
   display: flex;
   overflow:hidden;
+  position: relative;
 }
 
 .eliminated {
@@ -50,4 +51,14 @@ input.player-name-field {
   height: 48px;
   width: 100%;
   background: transparent;
+}
+
+.player-checkmark {
+  color: #28a745;
+  position: absolute;
+  display: none;
+}
+
+.player-card.selected .player-checkmark {
+  display: block;
 }

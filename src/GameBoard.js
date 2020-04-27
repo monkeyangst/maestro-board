@@ -11,7 +11,7 @@ class GameBoard extends Component {
       const players = [];
       for ( let i = 1; i <= 13; i++) {
         players.push({
-          name: 'Player ' + i,
+          name: 'Player',
           number: i,
           score: 0,
           isEliminated: false,
@@ -53,9 +53,9 @@ class GameBoard extends Component {
   }
 
   checkPlayer(e, playerNum) {
-    const newCheck = e.target.checked;
+    
     const players = this.state.players.map( (player, i) => {
-      if (playerNum === player.number) player.isChecked = newCheck;
+      if (playerNum === player.number) player.isChecked = !player.isChecked;
       return player;
     })
     this.setState({players});
@@ -108,7 +108,9 @@ class GameBoard extends Component {
           <div className="title">
             <h1>MAESTRO</h1>
           </div>
-          <div className="control-center">
+        </Col>
+        <Col xs={1}>
+        <div className="control-center">
             <button className="btn btn-success btn-sm btn-block" onClick={() => this.addToChecked(1)}>+1</button>
             <button className="btn btn-success btn-sm btn-block" onClick={() => this.addToChecked(2)}>+2</button>
             <button className="btn btn-success btn-sm btn-block" onClick={() => this.addToChecked(3)}>+3</button>
@@ -119,8 +121,9 @@ class GameBoard extends Component {
             <button className="btn btn-secondary btn-sm" onClick={this.uncheckAll}>Uncheck All</button>
             <button className="btn btn-danger btn-sm" onClick={this.eliminateChecked}>Eliminate</button>
           </div>
+
         </Col>
-        <Col xs={11}>
+        <Col xs={10}>
           <div>
             {players}
           </div>
