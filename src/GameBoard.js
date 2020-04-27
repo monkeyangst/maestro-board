@@ -27,6 +27,18 @@ class GameBoard extends Component {
     this.addToChecked = this.addToChecked.bind(this);
     this.uncheckAll = this.uncheckAll.bind(this);
     this.eliminateChecked = this.eliminateChecked.bind(this);
+    this.namePlayer = this.namePlayer.bind(this);
+  }
+
+  namePlayer(e, playerNum) {
+    console.log('Naming a player');
+    const newName = e.target.value;
+    const players = this.state.players.map( (player, i) => {
+      if (playerNum === player.number) player.name = newName;
+      return player;
+    })
+    this.setState({players});
+
   }
 
   scoreChange(e,playerNum) {
@@ -53,7 +65,8 @@ class GameBoard extends Component {
     const players = this.state.players.map( (player, i) => {
       if ( player.isChecked && !player.isEliminated && player.score < 25 ) player.score += howMany;
       return player;
-    })
+    });
+    this.uncheckAll();
     this.setState({players});
   }
 
@@ -86,6 +99,7 @@ class GameBoard extends Component {
       checkPlayer={this.checkPlayer}
       isChecked={player.isChecked}
       isEliminated={player.isEliminated}
+      namePlayer={this.namePlayer}
       />
     ))
     return (

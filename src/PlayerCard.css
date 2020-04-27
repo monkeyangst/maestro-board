@@ -10,6 +10,8 @@
   margin-left: -200px;
   border: 1px solid #666666;
   border-radius: 4px;
+  display: flex;
+  overflow:hidden;
 }
 
 .eliminated {
@@ -18,13 +20,15 @@
 
 .player-number {
   font-family: 'Titan One', Arial, Helvetica, sans-serif;
-  font-size: 1.2em;
+  font-size: 1em;
   line-height: 50px;
-  margin: 0 10px;
+  width: 2em;
+  text-align: right;
+  margin: 0 10px 0 0;
+  display: flexbox;
 }
 
 .player-name {
-  line-height: 50px;
   display: inline-block;
   height: 50px;
   margin: auto 0;
@@ -33,4 +37,17 @@
 .player-score {
   margin-left: 20px;
   color: #e0e0e0;
+}
+
+.selected {
+  border: 2px solid Red;
+  padding: -2px;
+}
+
+input.player-name-field {
+  padding: 0;
+  border: none;
+  height: 48px;
+  width: 100%;
+  background: transparent;
 }
