@@ -71,6 +71,18 @@ class GameBoard extends Component {
         },
       ]
     }
+    this.scoreChange = this.scoreChange.bind(this);
+  }
+
+  scoreChange(e,playerNum) {
+    const newScore = e.target.value;
+    if ( newScore > 25 ) return;
+
+    const players = this.state.players.map( (player, i) => {
+      if (playerNum === player.number) player.score = newScore;
+      return player;
+    })
+    this.setState({players});
   }
 
   render() {
@@ -80,6 +92,7 @@ class GameBoard extends Component {
       number={player.number}
       name={player.name}
       score={player.score}
+      updateScore={this.scoreChange}
       />
     ))
     return (

@@ -8,7 +8,14 @@ class Player extends Component {
     const score = this.props.score > 0 ? this.props.score : 0;
     return(
       <Row>
-        <Col xs={2}>Score here</Col>
+        <Col xs={2}>
+          <input
+            type="number"
+            className="score-input"
+            value={score}
+            onChange={ (e) => this.props.updateScore(e, this.props.number) }
+          />
+        </Col>
         <Col xs={10} className="player-track">
           <div className="board-bg">
           <PlayerCard name={this.props.name} number={this.props.number} score={score}/>
