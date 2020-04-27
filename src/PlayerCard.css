@@ -10,8 +10,10 @@
   margin-left: -200px;
   border: 1px solid #666666;
   border-radius: 4px;
-  
+}
 
+.eliminated {
+  opacity: .25;
 }
 
 .player-number {

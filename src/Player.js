@@ -23,7 +23,7 @@ class Player extends Component {
         </Col>
         <Col xs={11} className="player-track">
           <div className="board-bg">
-          <PlayerCard name={this.props.name} number={this.props.number} score={score}/>
+          <PlayerCard isEliminated={this.props.isEliminated} name={this.props.name} number={this.props.number} score={score}/>
           </div>
         </Col>
       </Row>
