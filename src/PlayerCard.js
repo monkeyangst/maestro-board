@@ -20,7 +20,7 @@ function PlayerCard(props) {
       <div className="player-name">
         <input 
           className="player-name-field"
-          placeholder="Type name"
+          placeholder="type name"
           type="text"
           value={props.name}
           onChange={(e) => props.namePlayer(e, props.number)}

@@ -41,10 +41,6 @@
   color: #e0e0e0;
 }
 
-.selected {
-  border: 2px solid Red;
-  padding: -2px;
-}
 
 input.player-name-field {
   padding: 0;
@@ -52,6 +48,12 @@ input.player-name-field {
   height: 48px;
   width: 100%;
   background: transparent;
+}
+
+input.player-name-field:focus {
+  background-color:Yellow;
+  outline:none;
+  border: 1px solid Purple;
 }
 
 .player-checkmark {
