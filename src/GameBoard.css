@@ -1,7 +1,22 @@
+h1.maestro-title {
+  color: #ffcc00;
+  text-transform: uppercase;
+  font-family: "Titan One", Courier;
+  transform: rotate(90deg);
+  transform-origin: center;
+  font-size: 72px;
+  text-shadow: black 4px -4px;
+  cursor: pointer;
+}  
+
 .control-center {
-  margin-top: 100px;
   font-size: 18px;
   text-align: center;
+}
+
+.control-center .instructions {
+  font-size: .6em;
+  color: #ffcc00;
 }
 
 .control-center button {
@@ -17,4 +32,15 @@
 
 div.title {
   height: 400px;
+}
+
+.add-player-button {
+  border-radius: 50%;
+  height: 32px;
+  width: 32px;
+}
+
+.add-remove-button {
+  margin-left: 2px;
+  margin-right: 2px;
 }

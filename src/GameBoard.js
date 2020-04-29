@@ -3,7 +3,7 @@ import Player from './Player';
 import {Row, Col} from 'react-bootstrap';
 import './GameBoard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faSkullCrossbones} from '@fortawesome/free-solid-svg-icons';
+import {faSkullCrossbones, faPlus, faMinus, faTimes} from '@fortawesome/free-solid-svg-icons';
 
 class GameBoard extends Component {
 
@@ -20,7 +20,8 @@ class GameBoard extends Component {
         }]
 
       this.state = {
-        players
+        players,
+        showControls: false
       }
 
     this.scoreChange = this.scoreChange.bind(this);
@@ -29,21 +30,37 @@ class GameBoard extends Component {
     this.uncheckAll = this.uncheckAll.bind(this);
     this.eliminateChecked = this.eliminateChecked.bind(this);
     this.namePlayer = this.namePlayer.bind(this);
-    this.addPlayer = this.addPlayer.bind(this);
+    this.changePlayers = this.changePlayers.bind(this);
+    this.toggleControls = this.toggleControls.bind(this);
   }
 
-  addPlayer() {
-    const nextPlayer = this.state.players.length + 1;
-    console.log('Adding player ' + nextPlayer);
-    const newPlayer = {
-      name: '',
-      number: nextPlayer,
-      score: 0,
-      isEliminated: false,
-      isChecked: false
+  toggleControls() {
+    // When controls are hidden, board should be completely "audience facing" -- no scorekeeper business visible
+    if (this.state.showControls) {
+      // if the controls are currently showing, hide them
+      this.setState({showControls: false});
+      // uncheck any remaining checked players, for audience-facingness
+      this.uncheckAll();
+    } else this.setState({showControls: true});
+  }
+
+  changePlayers(howMany) {
+    let newPlayerArray = [].concat(this.state.players);
+    if (howMany === 1) {
+      const nextPlayer = this.state.players.length + 1;
+      const newPlayer = {
+        name: '',
+        number: nextPlayer,
+        score: 0,
+        isEliminated: false,
+        isChecked: false
+      }
+      newPlayerArray.push(newPlayer);
+    } else if (howMany === -1 && newPlayerArray.length > 1) {
+      newPlayerArray.splice(-1,1);
     }
-    var joined = this.state.players.concat(newPlayer);
-    this.setState({ players: joined })
+
+    this.setState({ players: newPlayerArray })
 
   }
 
@@ -77,8 +94,13 @@ class GameBoard extends Component {
   }
 
   addToChecked(howMany) {
-    const players = this.state.players.map( (player, i) => {
-      if ( player.isChecked && !player.isEliminated && player.score < 25 ) player.score += howMany;
+    const players = this.state.players.map( (player) => {
+      const originalScore = player.score;
+      if ( player.isChecked && !player.isEliminated && player.score < 25 ) {
+        player.score += howMany;
+        // but if we have made score below zero or above 25, screw it
+        if (player.score > 25 || player.score < 0) player.score = originalScore;
+      }
       return player;
     });
     this.setState({players});
@@ -117,42 +139,42 @@ class GameBoard extends Component {
       />
     ))
 
-    let showControl = false;
 
     return (
       <Row>
         <Col xs={1}>
-        { showControl ? 
+        { this.state.showControls ? 
           <div className="control-center">
-            <h3>Scoring</h3>
-            <button className="btn btn-secondary btn-sm btn-block" onClick={() => this.addToChecked(1)}>1</button>
-            <button className="btn btn-secondary btn-sm btn-block" onClick={() => this.addToChecked(2)}>2</button>
-            <button className="btn btn-secondary btn-sm btn-block" onClick={() => this.addToChecked(3)}>3</button>
-            <button className="btn btn-secondary btn-sm btn-block" onClick={() => this.addToChecked(4)}>4</button>
-            <button className="btn btn-secondary btn-sm btn-block" onClick={() => this.addToChecked(5)}>5</button>
+            <button className="btn btn-danger btn-round" onClick={this.toggleControls}><FontAwesomeIcon icon={faTimes} /></button>
+            <p className="instructions">Click player number to select</p>
 
-            <button className="btn btn-dark btn-sm btn-block" onClick={() => this.addToChecked(-1)}>-1</button>
+            <h3>Scoring</h3>
+            <button className="btn btn-secondary btn-round add-remove-button" onClick={() => this.addToChecked(-1)}><FontAwesomeIcon icon={faMinus} /></button>
+            <button className="btn btn-secondary btn-round add-remove-button" onClick={() => this.addToChecked(1)}><FontAwesomeIcon icon={faPlus} /></button>
+
+            <h3>Players</h3>
+            <button className="btn btn-secondary btn-round add-remove-button" onClick={() => this.changePlayers(-1)}><FontAwesomeIcon icon={faMinus} /></button>
+            <button className="btn btn-secondary btn-round add-remove-button" onClick={() => this.changePlayers(1)}><FontAwesomeIcon icon={faPlus} /></button>
+
+
             <button className="btn btn-dark btn-sm" onClick={this.uncheckAll}>Uncheck All</button>
             <button className="btn btn-danger btn-sm" onClick={this.eliminateChecked}><FontAwesomeIcon icon={faSkullCrossbones} />Eliminate</button>
+
           </div>
+
           :
           <div className="title">
-            <h1>MAESTRO</h1>
+            <h1 title="Click to show controls" className="maestro-title" onClick={this.toggleControls}>MAESTRO</h1>
           </div>
         }
-          <button className="btn btn-secondary btn-sm">Controls</button>
 
         </Col>
         <Col xs={11}>
           <div>
             {players}
           </div>
-          <div className="addPlayerButton">
-            <button className="btn btn-sm btn-secondary" onClick={this.addPlayer}>+</button>
-          </div>
         </Col>
       </Row>
-
     )
   }
 }

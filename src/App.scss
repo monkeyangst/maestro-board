@@ -12,16 +12,11 @@
   background-repeat: no-repeat;
 }
 
-.App h1 {
-  color: #ffcc00;
-  text-transform: uppercase;
-  font-family: "Titan One", Courier;
-  transform: rotate(90deg);
-  transform-origin: center;
-  font-size: 72px;
-  text-shadow: black 4px -4px;
-}  
-
-
-
-$primary: "#ff0000";
+.btn-round {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 32px;
+  padding: 0;
+}
