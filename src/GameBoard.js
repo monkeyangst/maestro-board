@@ -90,7 +90,10 @@ class GameBoard extends Component {
       if (playerNum === player.number) player.isChecked = !player.isChecked;
       return player;
     })
-    this.setState({players});
+    // if the control center is not showing, checking a player should show it.
+
+    this.setState({players, showControls: true});
+  
   }
 
   addToChecked(howMany) {
