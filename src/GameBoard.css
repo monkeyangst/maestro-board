@@ -14,3 +14,7 @@
   font-size: 16px;
   color: #999999;
 }
+
+div.title {
+  height: 400px;
+}

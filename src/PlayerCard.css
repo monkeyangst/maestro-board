@@ -51,9 +51,7 @@ input.player-name-field {
 }
 
 input.player-name-field:focus {
-  background-color:Yellow;
   outline:none;
-  border: 1px solid Purple;
 }
 
 .player-checkmark {

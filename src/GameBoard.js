@@ -11,26 +11,40 @@ class GameBoard extends Component {
   constructor(props) {
     super(props);
 
-      const players = [];
-      for ( let i = 1; i <= 13; i++) {
-        players.push({
+      const players = [{
           name: '',
-          number: i,
+          number: 1,
           score: 0,
           isEliminated: false,
           isChecked: false
-        })
+        }]
+
       this.state = {
         players
       }
 
-    }
     this.scoreChange = this.scoreChange.bind(this);
     this.checkPlayer = this.checkPlayer.bind(this);
     this.addToChecked = this.addToChecked.bind(this);
     this.uncheckAll = this.uncheckAll.bind(this);
     this.eliminateChecked = this.eliminateChecked.bind(this);
     this.namePlayer = this.namePlayer.bind(this);
+    this.addPlayer = this.addPlayer.bind(this);
+  }
+
+  addPlayer() {
+    const nextPlayer = this.state.players.length + 1;
+    console.log('Adding player ' + nextPlayer);
+    const newPlayer = {
+      name: '',
+      number: nextPlayer,
+      score: 0,
+      isEliminated: false,
+      isChecked: false
+    }
+    var joined = this.state.players.concat(newPlayer);
+    this.setState({ players: joined })
+
   }
 
   namePlayer(e, playerNum) {
@@ -47,7 +61,6 @@ class GameBoard extends Component {
   scoreChange(e,playerNum) {
     const newScore = e.target.value;
     if ( newScore > 25 ) return;
-
     const players = this.state.players.map( (player, i) => {
       if (playerNum === player.number) player.score = newScore;
       return player;
@@ -56,7 +69,6 @@ class GameBoard extends Component {
   }
 
   checkPlayer(e, playerNum) {
-    
     const players = this.state.players.map( (player, i) => {
       if (playerNum === player.number) player.isChecked = !player.isChecked;
       return player;
@@ -104,14 +116,13 @@ class GameBoard extends Component {
       namePlayer={this.namePlayer}
       />
     ))
+
+    let showControl = false;
+
     return (
       <Row>
         <Col xs={1}>
-          <div className="title">
-            <h1>MAESTRO</h1>
-          </div>
-        </Col>
-        <Col xs={1}>
+        { showControl ? 
           <div className="control-center">
             <h3>Scoring</h3>
             <button className="btn btn-secondary btn-sm btn-block" onClick={() => this.addToChecked(1)}>1</button>
@@ -124,11 +135,20 @@ class GameBoard extends Component {
             <button className="btn btn-dark btn-sm" onClick={this.uncheckAll}>Uncheck All</button>
             <button className="btn btn-danger btn-sm" onClick={this.eliminateChecked}><FontAwesomeIcon icon={faSkullCrossbones} />Eliminate</button>
           </div>
+          :
+          <div className="title">
+            <h1>MAESTRO</h1>
+          </div>
+        }
+          <button className="btn btn-secondary btn-sm">Controls</button>
 
         </Col>
-        <Col xs={10}>
+        <Col xs={11}>
           <div>
             {players}
+          </div>
+          <div className="addPlayerButton">
+            <button className="btn btn-sm btn-secondary" onClick={this.addPlayer}>+</button>
           </div>
         </Col>
       </Row>
