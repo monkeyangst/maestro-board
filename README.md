@@ -1,3 +1,14 @@
+This is an online version of the scoreboard familiar to those who have played the improv game [Maestro](http://wiki.austinimprov.com/wiki/Maestro).
+
+During the 2020 COVID-19 pandemic, many improv shows, including those at the [Hideout Theatre](https://hideouttheatre.com) have moved online, necessitating some adaptation. This scoreboard is intended to be used by a scorekeeper to show the audience the players' standings at various points throughout the show.
+
+In real life, the scoreboard is a big wooden thing across which players move their own names, written on cardboard strips. In this virtual version, a scorekeeper handles assigning points to each player.
+
+My goal for this app, beyond learning React, was to have an interface that can be made clean enough to present to the audience. I hope I have succeeded.
+
+This software is released under the GPL, but one thing to note is that the game of Maestro itself is trademarked, and may be performed only under license from the [International Theatresports Institute](https://impro.global/formats/maestro-impro).
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
