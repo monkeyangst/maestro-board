@@ -32,6 +32,51 @@ class GameBoard extends Component {
     this.namePlayer = this.namePlayer.bind(this);
     this.changePlayers = this.changePlayers.bind(this);
     this.toggleControls = this.toggleControls.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+  }
+
+  handleKeyPress(event){
+    if(event.keyCode === 39) {
+      // RIGHT arrow key -- add one point to checked players
+      this.addToChecked(1);
+    } 
+    else if (event.keyCode === 37) {
+      // LEFT arrow key -- subtract one point from checked players
+      this.addToChecked(-1);
+    } 
+    else if (event.keyCode === 49) {
+      // Number key 1 pressed -- add one point and then uncheck everyone
+      this.addToChecked(1);
+      this.uncheckAll();
+    }
+    else if (event.keyCode === 50) {
+      // Number key 2 pressed -- add one point and then uncheck everyone
+      this.addToChecked(2);
+      this.uncheckAll();
+    }
+    else if (event.keyCode === 51) {
+      // Number key 3 pressed -- add one point and then uncheck everyone
+      this.addToChecked(3);
+      this.uncheckAll();
+    }
+    else if (event.keyCode === 52) {
+      // Number key 4 pressed -- add one point and then uncheck everyone
+      this.addToChecked(4);
+      this.uncheckAll();
+    }
+    else if (event.keyCode === 53) {
+      // Number key 5 pressed -- add one point and then uncheck everyone
+      this.addToChecked(5);
+      this.uncheckAll();
+    }
+    else if (event.keyCode === 69) {
+      // E key pressed -- eliminate selected players. Also, nice.
+      this.eliminateChecked();
+      this.uncheckAll();
+    }
+  }
+  componentDidMount(){
+    document.addEventListener("keydown", this.handleKeyPress, false);
   }
 
   toggleControls() {
@@ -65,7 +110,6 @@ class GameBoard extends Component {
   }
 
   namePlayer(e, playerNum) {
-    console.log('Naming a player');
     const newName = e.target.value;
     const players = this.state.players.map( (player, i) => {
       if (playerNum === player.number) player.name = newName;
@@ -123,7 +167,6 @@ class GameBoard extends Component {
       player.isChecked = false;
       return player;
     })
-    console.dir(players);
     this.setState({players});
   }
 
