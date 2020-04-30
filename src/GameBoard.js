@@ -217,6 +217,14 @@ class GameBoard extends Component {
         </Col>
         <Col xs={11}>
           <div>
+              <div class="number-markers">
+                <span className="number-marker">5</span>
+                <span className="number-marker">10</span>
+                <span className="number-marker">15</span>
+                <span className="number-marker">20</span>
+                <span className="number-marker">25</span>
+              </div>
+
             {players}
           </div>
         </Col>

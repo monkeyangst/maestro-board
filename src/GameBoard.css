@@ -44,3 +44,19 @@ div.title {
   margin-left: 2px;
   margin-right: 2px;
 }
+
+.number-markers {
+  font-size: .5em;
+  color: #ffcc00;
+  margin-left: 189px;
+  margin-right: -15px;
+  display: flex;
+
+}
+
+.number-marker {
+  display: flexbox;
+  width: 20%;
+  text-align: right;
+
+}
