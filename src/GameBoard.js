@@ -82,14 +82,6 @@ class GameBoard extends Component {
       this.eliminateChecked();
       this.uncheckAll();
     }
-    else if (event.key === '+') {
-      // + key pressed -- add player
-      this.changePlayers(1);
-    }
-    else if (event.key === '-') {
-      // - key pressed -- remove last player
-      this.changePlayers(-1);
-    }
 
   }
   componentDidMount() {
@@ -228,52 +220,54 @@ class GameBoard extends Component {
 
 
     return (
-      <Row>
-        <Col xs={1}>
-        { this.state.showControls ? 
-          <div className="control-center">
-            <button className="btn btn-danger btn-round" onClick={this.toggleControls}><FontAwesomeIcon icon={faTimes} /></button>
-            <p className="instructions">Click player number to select</p>
-
-            <h3>Scoring</h3>
-            <button className="btn btn-secondary btn-round add-remove-button" onClick={() => this.addToChecked(-1)}><FontAwesomeIcon icon={faMinus} /></button>
-            <button className="btn btn-secondary btn-round add-remove-button" onClick={() => this.addToChecked(1)}><FontAwesomeIcon icon={faPlus} /></button>
-
-            <h3>Players</h3>
-            <button className="btn btn-secondary btn-round add-remove-button" onClick={() => this.removePlayer(-1)}><FontAwesomeIcon icon={faMinus} /></button>
-            <button className="btn btn-secondary btn-round add-remove-button" onClick={() => this.addPlayer(1)}><FontAwesomeIcon icon={faPlus} /></button>
-
-
-            <button className="btn btn-dark btn-sm" onClick={this.uncheckAll}>Uncheck All</button>
-            <button className="btn btn-danger btn-sm" onClick={this.eliminateChecked}><FontAwesomeIcon icon={faSkullCrossbones} />Eliminate</button>
-
-          </div>
-
-          :
-          <div className="title">
-            <h1 className="maestro-title">MAeSTRo</h1>
-          </div>
-        }
-
-        </Col>
-        <Col xs={11}>
-          { this.state.gameRunning ? 
-            <div>
-                <div className="number-markers">
-                  <span className="number-marker">5</span>
-                  <span className="number-marker">10</span>
-                  <span className="number-marker">15</span>
-                  <span className="number-marker">20</span>
-                  <span className="number-marker">25</span>
-                </div>
-
-              {players}
+      <div className="game-board">
+        <Row>
+          <Col xs={1}>
+          { this.state.showControls ? 
+            <div className="control-center">
+              <button className="btn btn-danger btn-round" onClick={this.toggleControls}><FontAwesomeIcon icon={faTimes} /></button>
+              <p className="instructions">Click player number to select</p>
+  
+              <h3>Scoring</h3>
+              <button className="btn btn-secondary btn-round add-remove-button" onClick={() => this.addToChecked(-1)}><FontAwesomeIcon icon={faMinus} /></button>
+              <button className="btn btn-secondary btn-round add-remove-button" onClick={() => this.addToChecked(1)}><FontAwesomeIcon icon={faPlus} /></button>
+  
+              <h3>Players</h3>
+              <button className="btn btn-secondary btn-round add-remove-button" onClick={() => this.removePlayer(-1)}><FontAwesomeIcon icon={faMinus} /></button>
+              <button className="btn btn-secondary btn-round add-remove-button" onClick={() => this.addPlayer(1)}><FontAwesomeIcon icon={faPlus} /></button>
+  
+  
+              <button className="btn btn-dark btn-sm" onClick={this.uncheckAll}>Uncheck All</button>
+              <button className="btn btn-danger btn-sm" onClick={this.eliminateChecked}><FontAwesomeIcon icon={faSkullCrossbones} />Eliminate</button>
+  
             </div>
+  
             :
-            <Setup players={this.state.players} namePlayer={this.namePlayer} addPlayer={() => this.changePlayers(1)} startGame={this.startGame} />
+            <div className="title">
+              <h1 className="maestro-title">MAeSTRo</h1>
+            </div>
           }
-        </Col>
-      </Row>
+  
+          </Col>
+          <Col xs={11}>
+            { this.state.gameRunning ? 
+              <div>
+                  <div className="number-markers">
+                    <span className="number-marker">5</span>
+                    <span className="number-marker">10</span>
+                    <span className="number-marker">15</span>
+                    <span className="number-marker">20</span>
+                    <span className="number-marker">25</span>
+                  </div>
+  
+                {players}
+              </div>
+              :
+              <Setup players={this.state.players} namePlayer={this.namePlayer} addPlayer={() => this.changePlayers(1)} startGame={this.startGame} />
+            }
+          </Col>
+        </Row>
+      </div>
     )
   }
 }

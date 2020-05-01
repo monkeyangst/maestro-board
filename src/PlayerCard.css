@@ -13,6 +13,8 @@
   display: flex;
   overflow:hidden;
   position: relative;
+  cursor: pointer;
+
 }
 
 .player-card.selected {
@@ -27,22 +29,18 @@
   font-family: 'Titan One', Arial, Helvetica, sans-serif;
   font-size: 1em;
   line-height: 50px;
-  width: 1.5em;
+  width: 20px;
   text-align: center;
   margin: 0 10px 0 6px;
   display: flexbox;
-  cursor: pointer;
 }
 
 .player-name {
   display: flexbox;
   height: 50px;
   margin: auto 0;
-}
-
-.player-score {
-  margin-left: 20px;
-  color: #e0e0e0;
+  width: 100%;
+  text-align: left;
 }
 
 
