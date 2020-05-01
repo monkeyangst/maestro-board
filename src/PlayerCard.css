@@ -15,6 +15,10 @@
   position: relative;
 }
 
+.player-card.selected {
+  border: 2px solid #ff0000;
+}
+
 .eliminated {
   opacity: .25;
 }
@@ -23,15 +27,15 @@
   font-family: 'Titan One', Arial, Helvetica, sans-serif;
   font-size: 1em;
   line-height: 50px;
-  width: 2em;
-  text-align: right;
+  width: 1.5em;
+  text-align: center;
   margin: 0 10px 0 6px;
   display: flexbox;
   cursor: pointer;
 }
 
 .player-name {
-  display: inline-block;
+  display: flexbox;
   height: 50px;
   margin: auto 0;
 }
@@ -42,24 +46,3 @@
 }
 
 
-input.player-name-field {
-  padding: 0;
-  border: none;
-  height: 48px;
-  width: 100%;
-  background: transparent;
-}
-
-input.player-name-field:focus {
-  outline:none;
-}
-
-.player-checkmark {
-  color: #28a745;
-  position: absolute;
-  display: none;
-}
-
-.player-card.selected .player-checkmark {
-  display: block;
-}

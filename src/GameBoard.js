@@ -4,6 +4,7 @@ import {Row, Col} from 'react-bootstrap';
 import './GameBoard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faSkullCrossbones, faPlus, faMinus, faTimes} from '@fortawesome/free-solid-svg-icons';
+import Setup from './Setup';
 
 class GameBoard extends Component {
 
@@ -21,7 +22,8 @@ class GameBoard extends Component {
 
       this.state = {
         players,
-        showControls: false
+        showControls: false,
+        gameRunning: false
       }
 
     this.scoreChange = this.scoreChange.bind(this);
@@ -30,13 +32,19 @@ class GameBoard extends Component {
     this.uncheckAll = this.uncheckAll.bind(this);
     this.eliminateChecked = this.eliminateChecked.bind(this);
     this.namePlayer = this.namePlayer.bind(this);
-    this.changePlayers = this.changePlayers.bind(this);
+    this.addPlayer = this.addPlayer.bind(this);
+    this.removePlayer = this.removePlayer.bind(this);
     this.toggleControls = this.toggleControls.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.startGame = this.startGame.bind(this);
   }
 
   handleKeyPress(event){
-    if(event.keyCode === 39) {
+    if (event.key === "?") {
+      // ? pressed -- help system
+      alert("I will help you!");
+    }
+    else if(event.keyCode === 39) {
       // RIGHT arrow key -- add one point to checked players
       this.addToChecked(1);
     } 
@@ -74,9 +82,22 @@ class GameBoard extends Component {
       this.eliminateChecked();
       this.uncheckAll();
     }
+    else if (event.key === '+') {
+      // + key pressed -- add player
+      this.changePlayers(1);
+    }
+    else if (event.key === '-') {
+      // - key pressed -- remove last player
+      this.changePlayers(-1);
+    }
+
   }
-  componentDidMount(){
-    document.addEventListener("keydown", this.handleKeyPress, false);
+  componentDidMount() {
+    document.addEventListener("keyup", this.handleKeyPress, false);
+  }
+
+  startGame() {
+    this.setState({ gameRunning: true });
   }
 
   toggleControls() {
@@ -104,9 +125,29 @@ class GameBoard extends Component {
     } else if (howMany === -1 && newPlayerArray.length > 1) {
       newPlayerArray.splice(-1,1);
     }
-
     this.setState({ players: newPlayerArray })
+  }
 
+  addPlayer() {
+    let newPlayerArray = [].concat(this.state.players);
+    const nextPlayer = this.state.players.length + 1;
+    const newPlayer = {
+      name: '',
+      number: nextPlayer,
+      score: 0,
+      isEliminated: false,
+      isChecked: false
+    }
+    newPlayerArray.push(newPlayer);
+    this.setState({ players: newPlayerArray });
+  }
+
+  removePlayer() {
+    if (this.state.players.length > 1) {
+      let newPlayerArray = [].concat(this.state.players);
+      newPlayerArray.splice(-1,1);
+      this.setState({players: newPlayerArray})
+    }
   }
 
   namePlayer(e, playerNum) {
@@ -199,8 +240,8 @@ class GameBoard extends Component {
             <button className="btn btn-secondary btn-round add-remove-button" onClick={() => this.addToChecked(1)}><FontAwesomeIcon icon={faPlus} /></button>
 
             <h3>Players</h3>
-            <button className="btn btn-secondary btn-round add-remove-button" onClick={() => this.changePlayers(-1)}><FontAwesomeIcon icon={faMinus} /></button>
-            <button className="btn btn-secondary btn-round add-remove-button" onClick={() => this.changePlayers(1)}><FontAwesomeIcon icon={faPlus} /></button>
+            <button className="btn btn-secondary btn-round add-remove-button" onClick={() => this.removePlayer(-1)}><FontAwesomeIcon icon={faMinus} /></button>
+            <button className="btn btn-secondary btn-round add-remove-button" onClick={() => this.addPlayer(1)}><FontAwesomeIcon icon={faPlus} /></button>
 
 
             <button className="btn btn-dark btn-sm" onClick={this.uncheckAll}>Uncheck All</button>
@@ -210,23 +251,27 @@ class GameBoard extends Component {
 
           :
           <div className="title">
-            <h1 title="Click to show controls" className="maestro-title" onClick={this.toggleControls}>MAESTRO</h1>
+            <h1 className="maestro-title">MAeSTRo</h1>
           </div>
         }
 
         </Col>
         <Col xs={11}>
-          <div>
-              <div class="number-markers">
-                <span className="number-marker">5</span>
-                <span className="number-marker">10</span>
-                <span className="number-marker">15</span>
-                <span className="number-marker">20</span>
-                <span className="number-marker">25</span>
-              </div>
+          { this.state.gameRunning ? 
+            <div>
+                <div className="number-markers">
+                  <span className="number-marker">5</span>
+                  <span className="number-marker">10</span>
+                  <span className="number-marker">15</span>
+                  <span className="number-marker">20</span>
+                  <span className="number-marker">25</span>
+                </div>
 
-            {players}
-          </div>
+              {players}
+            </div>
+            :
+            <Setup players={this.state.players} namePlayer={this.namePlayer} addPlayer={() => this.changePlayers(1)} startGame={this.startGame} />
+          }
         </Col>
       </Row>
     )

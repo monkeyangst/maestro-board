@@ -1,11 +1,12 @@
 h1.maestro-title {
   color: #ffcc00;
-  text-transform: uppercase;
-  font-family: "Titan One", Courier;
-  transform: rotate(90deg);
+  font-family: "Luckiest Guy", Courier;
+  letter-spacing: 3px;
+
+  transform: rotate(-90deg) translateX(-300px);
   transform-origin: center;
   font-size: 72px;
-  text-shadow: black 4px -4px;
+  text-shadow: black -4px 4px;
   cursor: pointer;
 }  
 
