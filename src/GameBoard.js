@@ -36,7 +36,7 @@ class GameBoard extends Component {
     this.namePlayer = this.namePlayer.bind(this);
     this.addPlayer = this.addPlayer.bind(this);
     this.removePlayer = this.removePlayer.bind(this);
-    this.toggleControls = this.toggleControls.bind(this);
+    // this.toggleControls = this.toggleControls.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.startGame = this.startGame.bind(this);
   }
@@ -103,33 +103,33 @@ class GameBoard extends Component {
     this.setState({ gameRunning: true, helpActive: false });
   }
 
-  toggleControls() {
-    // When controls are hidden, board should be completely "audience facing" -- no scorekeeper business visible
-    if (this.state.showControls) {
-      // if the controls are currently showing, hide them
-      this.setState({showControls: false});
-      // uncheck any remaining checked players, for audience-facingness
-      this.uncheckAll();
-    } else this.setState({showControls: true});
-  }
+  // toggleControls() {
+  //   // When controls are hidden, board should be completely "audience facing" -- no scorekeeper business visible
+  //   if (this.state.showControls) {
+  //     // if the controls are currently showing, hide them
+  //     this.setState({showControls: false});
+  //     // uncheck any remaining checked players, for audience-facingness
+  //     this.uncheckAll();
+  //   } else this.setState({showControls: true});
+  // }
 
-  changePlayers(howMany) {
-    let newPlayerArray = [].concat(this.state.players);
-    if (howMany === 1) {
-      const nextPlayer = this.state.players.length + 1;
-      const newPlayer = {
-        name: '',
-        number: nextPlayer,
-        score: 0,
-        isEliminated: false,
-        isChecked: false
-      }
-      newPlayerArray.push(newPlayer);
-    } else if (howMany === -1 && newPlayerArray.length > 1) {
-      newPlayerArray.splice(-1,1);
-    }
-    this.setState({ players: newPlayerArray })
-  }
+  // changePlayers(howMany) {
+  //   let newPlayerArray = [].concat(this.state.players);
+  //   if (howMany === 1) {
+  //     const nextPlayer = this.state.players.length + 1;
+  //     const newPlayer = {
+  //       name: '',
+  //       number: nextPlayer,
+  //       score: 0,
+  //       isEliminated: false,
+  //       isChecked: false
+  //     }
+  //     newPlayerArray.push(newPlayer);
+  //   } else if (howMany === -1 && newPlayerArray.length > 1) {
+  //     newPlayerArray.splice(-1,1);
+  //   }
+  //   this.setState({ players: newPlayerArray })
+  // }
 
   addPlayer() {
     let newPlayerArray = [].concat(this.state.players);
@@ -176,12 +176,11 @@ class GameBoard extends Component {
   checkPlayer(e, playerNum) {
     const players = this.state.players.map( (player, i) => {
       if (playerNum === player.number) player.isChecked = !player.isChecked;
+      if (player.isEliminated) player.isEliminated = false;
       return player;
     })
-    // if the control center is not showing, checking a player should show it.
 
     this.setState({players});
-  
   }
 
   addToChecked(howMany) {
