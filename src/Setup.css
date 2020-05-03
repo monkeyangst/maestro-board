@@ -1,6 +1,6 @@
 .setup-panel {
   font-size: .8em;
-  /* opacity: 100%; */
+  opacity: .8;
   position: absolute;
   left: 5%;
   top: 0;
@@ -16,4 +16,27 @@
 .setup-window p {
   text-align: center;
   font-size: .8em;
+}
+
+.player-entry-field {
+  margin-bottom: 4px;
+}
+
+.player-entry-field-number {
+  width: 24px;
+  text-align: right;
+}
+
+.setup-buttons {
+  margin-top: 10px;
+  display: flex;
+}
+
+.add-player-button {
+  margin-left: 4px;
+}
+
+.start-game-button {
+  margin-right: 0;
+  margin-left: auto;
 }

@@ -13,13 +13,24 @@ class GameBoard extends Component {
   constructor(props) {
     super(props);
 
-      const players = [{
-          name: '',
-          number: 1,
-          score: 0,
-          isEliminated: false,
-          isChecked: false
-        }]
+    const players = [];
+    for ( let i = 1; i < 13; i++) {
+      players.push({
+        name: '',
+        number: i,
+        score: 0,
+        isEliminated: false,
+        isChecked: false
+      })
+    }
+
+      // const players = [{
+      //     name: '',
+      //     number: 1,
+      //     score: 0,
+      //     isEliminated: false,
+      //     isChecked: false
+      //   }]
 
       this.state = {
         players,

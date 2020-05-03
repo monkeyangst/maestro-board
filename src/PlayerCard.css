@@ -4,17 +4,15 @@
   height: 48px;
   width: 198px;
   max-width: 200px;
-
   color: #333333;
   line-height: 48px;
   margin-left: -200px;
   border: 1px solid #666666;
   border-radius: 4px;
   display: flex;
-  overflow:hidden;
+  overflow: hidden;
   position: relative;
   cursor: pointer;
-
 }
 
 .player-card.selected {
@@ -29,7 +27,7 @@
   font-family: 'Titan One', Arial, Helvetica, sans-serif;
   font-size: 1em;
   line-height: 50px;
-  width: 20px;
+  width: 24px;
   text-align: center;
   margin: 0 10px 0 6px;
   display: flexbox;

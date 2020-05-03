@@ -16,8 +16,9 @@ function Help(props) {
         <li><span className="help-key">5</span>Assign selected players a 5</li>
         <li><span className="help-key"><FontAwesomeIcon icon={faArrowRight}/></span>give one point to selected players</li>
         <li><span className="help-key"><FontAwesomeIcon icon={faArrowLeft}/></span>remove one point from selected players</li>
-        <li><span className="help-key">E</span>Eliminate selected players</li>
-        <li><span className="help-key">?</span>Show this help panel</li>
+        <li><span className="help-key">U</span>Unselect all players</li>
+        <li><span className="help-key">E</span>Eliminate selected players (tap player card again to undo)</li>
+        <li><span className="help-key">?</span>Show/hide this help panel</li>
 
 
       </ul>

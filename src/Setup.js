@@ -44,25 +44,26 @@ class Setup extends Component {
 
     return(
       <div className="setup-panel">
-        <p>Welcome to Maestro! Please enter the name of each player.</p>
+        <h3>Player Setup</h3>
         <div className="player-entry">
           {playerList}
-          <button 
-            className="btn btn-secondary btn-round"
-            onClick={this.props.removePlayer}
-          >
-            <FontAwesomeIcon icon={faMinus} />
-          </button>
-           <button 
-            className="btn btn-secondary btn-round"
-            onClick={this.props.addPlayer}
-          >
-            <FontAwesomeIcon icon={faPlus} />
-          </button>
-          <button className="btn btn-success" onClick={this.props.startGame}>Start Maestro!</button>
+          <div className="setup-buttons">
+            <button 
+              className="remove-player-button btn btn-secondary btn-round" title="Remove player"
+              onClick={this.props.removePlayer}
+            >
+              <FontAwesomeIcon icon={faMinus} />
+            </button>
+             <button 
+              className="add-player-button btn btn-secondary btn-round" title="Add player"
+              onClick={this.props.addPlayer}
+            >
+              <FontAwesomeIcon icon={faPlus} />
+            </button>
+            <button className="start-game-button btn btn-success" title="Start Maestro" onClick={this.props.startGame}>Start Maestro!</button>
+          </div>
         </div>
       </div>
-
     )
   }
 }
