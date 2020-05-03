@@ -84,6 +84,15 @@ class GameBoard extends Component {
       this.eliminateChecked();
       this.uncheckAll();
     }
+    else if (event.key === 's') {
+      // S key pressed -- enter setup mode again
+      this.setState({gameRunning: false});
+      this.uncheckAll();
+    }
+    else if (event.key === 'u') {
+      // U key pressed -- uncheck everyone
+      this.uncheckAll();
+    }
 
   }
   componentDidMount() {
