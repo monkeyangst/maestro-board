@@ -1,8 +1,19 @@
-.setup-window {
+.setup-panel {
+  font-size: .8em;
+  opacity: 80%;
+  position: absolute;
+  left: 5%;
+  top: 0;
   background-color: #999999;
   width: 500px;
-  height: 500px;
+  height: 700px;
+  background-color: #000000;
   padding: 20px;
   border-radius: 10px;
-  border: 3px solid #333333;
+  border: 3px solid #999999;
+  }
+
+.setup-window p {
+  text-align: center;
+  font-size: .8em;
 }

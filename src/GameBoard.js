@@ -5,6 +5,7 @@ import './GameBoard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faSkullCrossbones, faPlus, faMinus, faTimes} from '@fortawesome/free-solid-svg-icons';
 import Setup from './Setup';
+import Help from './Help';
 
 class GameBoard extends Component {
 
@@ -23,7 +24,8 @@ class GameBoard extends Component {
       this.state = {
         players,
         showControls: false,
-        gameRunning: false
+        gameRunning: false,
+        helpActive: true
       }
 
     this.scoreChange = this.scoreChange.bind(this);
@@ -42,7 +44,7 @@ class GameBoard extends Component {
   handleKeyPress(event){
     if (event.key === "?") {
       // ? pressed -- help system
-      alert("I will help you!");
+      this.setState({helpActive: !this.state.helpActive})
     }
     else if(event.keyCode === 39) {
       // RIGHT arrow key -- add one point to checked players
@@ -89,7 +91,7 @@ class GameBoard extends Component {
   }
 
   startGame() {
-    this.setState({ gameRunning: true });
+    this.setState({ gameRunning: true, helpActive: false });
   }
 
   toggleControls() {
@@ -169,7 +171,7 @@ class GameBoard extends Component {
     })
     // if the control center is not showing, checking a player should show it.
 
-    this.setState({players, showControls: true});
+    this.setState({players});
   
   }
 
@@ -193,7 +195,6 @@ class GameBoard extends Component {
     })
     this.setState({players});
   }
-
 
   uncheckAll() {
     const players = this.state.players.map( (player, i) => {
@@ -250,7 +251,6 @@ class GameBoard extends Component {
   
           </Col>
           <Col xs={11}>
-            { this.state.gameRunning ? 
               <div>
                   <div className="number-markers">
                     <span className="number-marker">5</span>
@@ -262,9 +262,15 @@ class GameBoard extends Component {
   
                 {players}
               </div>
+              { !this.state.gameRunning ? 
+                <Setup players={this.state.players} namePlayer={this.namePlayer} addPlayer={this.addPlayer} removePlayer={this.removePlayer} startGame={this.startGame} />
+              : null }
+            { this.state.helpActive ? 
+              <Help/>
               :
-              <Setup players={this.state.players} namePlayer={this.namePlayer} addPlayer={() => this.changePlayers(1)} startGame={this.startGame} />
+              null
             }
+
           </Col>
         </Row>
       </div>

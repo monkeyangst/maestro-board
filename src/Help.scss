@@ -1,0 +1,36 @@
+.help-panel {
+  font-size: .8em;
+  opacity: 70%;
+  position: absolute;
+  height: 500px;
+  width: 500px;
+  right: 10%;
+  top:0;
+  background-color: #000000;
+  padding: 20px;
+  border-radius: 10px;
+  border: 3px solid #999999;
+  overflow: visible;
+}
+
+.help-panel .help-key {
+  display: inline-block;
+  text-align: center;
+  line-height: 1.5em;
+  height: 1.5em;
+  width: 1.5em;
+  background-color: #666666;
+  border-radius: 4px;
+  font-weight: 900;
+  color: White;
+  margin-right: 20px;
+  border: 1px solid White;
+}
+
+.help-panel ul {
+  list-style-type: none;
+}
+
+.help-panel li {
+  line-height: 2em;
+}
