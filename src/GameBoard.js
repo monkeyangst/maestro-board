@@ -57,11 +57,11 @@ class GameBoard extends Component {
       // ? pressed -- help system
       this.setState({helpActive: !this.state.helpActive})
     }
-    else if(event.keyCode === 39) {
+    else if(event.keyCode === 39 || event.key === "+") {
       // RIGHT arrow key -- add one point to checked players
       this.addToChecked(1);
     } 
-    else if (event.keyCode === 37) {
+    else if (event.keyCode === 37 || event.key === "-") {
       // LEFT arrow key -- subtract one point from checked players
       this.addToChecked(-1);
     } 

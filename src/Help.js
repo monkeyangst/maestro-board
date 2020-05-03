@@ -7,21 +7,57 @@ import {faArrowRight, faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 function Help(props) {
   return(
     <div className="help-panel">
-      <h3>Key Commands</h3>
-      <ul>
-        <li><span className="help-key">1</span>Assign selected players a 1</li>
-        <li><span className="help-key">2</span>Assign selected players a 2</li>
-        <li><span className="help-key">3</span>Assign selected players a 3</li>
-        <li><span className="help-key">4</span>Assign selected players a 4</li>
-        <li><span className="help-key">5</span>Assign selected players a 5</li>
-        <li><span className="help-key"><FontAwesomeIcon icon={faArrowRight}/></span>give one point to selected players</li>
-        <li><span className="help-key"><FontAwesomeIcon icon={faArrowLeft}/></span>remove one point from selected players</li>
-        <li><span className="help-key">U</span>Unselect all players</li>
-        <li><span className="help-key">E</span>Eliminate selected players (tap player card again to undo)</li>
-        <li><span className="help-key">?</span>Show/hide this help panel</li>
+      <h3>Help</h3>
+      <p>Select players by clicking their names. Assign points using key commands below. Accidentally eliminated players can be reinstated by selecting their name again.</p>
+      <h4>Key Commands</h4>
+      <table className="key-commands">
+        <tr>
+					<td><span className="help-key">1</span></td>
+					<td>Assign selected players a 1</td>
+				</tr>
+        <tr>
+					<td><span className="help-key">2</span></td>
+					<td>Assign selected players a 2</td>
+				</tr>
+        <tr>
+					<td><span className="help-key">3</span></td>
+					<td>Assign selected players a 3</td>
+				</tr>
+        <tr>
+					<td><span className="help-key">4</span></td>
+					<td>Assign selected players a 4</td>
+				</tr>
+        <tr>
+					<td><span className="help-key">5</span></td>
+					<td>Assign selected players a 5</td>
+				</tr>
+        <tr>
+					<td><span className="help-key"><FontAwesomeIcon icon={faArrowRight}/></span> or <span className="help-key">+</span></td>
+					<td>Give one point to selected players</td>
+				</tr>
+        <tr>
+					<td><span className="help-key"><FontAwesomeIcon icon={faArrowLeft}/></span> or <span className="help-key">-</span></td>
+					<td>Remove one point from selected players</td>
+				</tr>
+        <tr>
+					<td><span className="help-key">U</span></td>
+					<td>Unselect all players</td>
+				</tr>
+        <tr>
+					<td><span className="help-key">E</span></td>
+					<td>Eliminate selected players (tap player card again to undo)</td>
+				</tr>
+        <tr>
+					<td><span className="help-key">S</span></td>
+					<td>Show Player Setup panel</td>
+				</tr>
+        <tr>
+					<td><span className="help-key">?</span></td>
+					<td>Show/hide Help panel</td>
+				</tr>
 
 
-      </ul>
+      </table>
     </div>
   )
 }

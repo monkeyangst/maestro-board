@@ -25,9 +25,9 @@
 
 .player-number {
   font-family: 'Titan One', Arial, Helvetica, sans-serif;
-  font-size: 1em;
+  font-size: .9em;
   line-height: 50px;
-  width: 24px;
+  width: 1.5em;
   text-align: center;
   margin: 0 10px 0 6px;
   display: flexbox;
