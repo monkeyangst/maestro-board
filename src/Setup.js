@@ -1,12 +1,12 @@
 // Setup window
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faPlus, faMinus} from '@fortawesome/free-solid-svg-icons';
 import {Row, Col} from 'react-bootstrap';
 import './Setup.css';
 
-function PlayerEntry(props) {
+const PlayerEntry = (props) => {
   let playerID = "player-" + props.number;
   return(
     <Row className="player-entry-field">
@@ -33,39 +33,36 @@ function PlayerEntry(props) {
   )
 }
 
-class Setup extends Component {
-  render() {
-    let howManyPlayers = this.props.players.length;
-    console.log(howManyPlayers + ' players');
-    const playerList = this.props.players.map((player,i) => (
-      <PlayerEntry key={player.number} name={player.name} number={player.number} namePlayer={this.props.namePlayer} addPlayer={this.props.addPlayer} removePlayer={this.props.removePlayer} isLast={(player.number === howManyPlayers) ? true : false}/>
-    ))
+const Setup = (props) => {
+  let howManyPlayers = props.players.length;
+  console.log(howManyPlayers + ' players');
+  const playerList = props.players.map((player,i) => (
+    <PlayerEntry key={player.number} name={player.name} number={player.number} namePlayer={props.namePlayer} addPlayer={props.addPlayer} removePlayer={props.removePlayer} isLast={(player.number === howManyPlayers) ? true : false}/>
+  ))
 
-
-    return(
-      <div className="setup-panel">
-        <h3>Player Setup</h3>
-        <div className="player-entry">
-          {playerList}
-          <div className="setup-buttons">
+  return (
+    <div className="setup-panel">
+      <h3>Player Setup</h3>
+      <div className="player-entry">
+        {playerList}
+        <div className="setup-buttons">
+          <button 
+            className="remove-player-button btn btn-secondary btn-round" title="Remove player"
+            onClick={props.removePlayer}
+          >
+            <FontAwesomeIcon icon={faMinus} />
+          </button>
             <button 
-              className="remove-player-button btn btn-secondary btn-round" title="Remove player"
-              onClick={this.props.removePlayer}
-            >
-              <FontAwesomeIcon icon={faMinus} />
-            </button>
-             <button 
-              className="add-player-button btn btn-secondary btn-round" title="Add player"
-              onClick={this.props.addPlayer}
-            >
-              <FontAwesomeIcon icon={faPlus} />
-            </button>
-            <button className="start-game-button btn btn-success" title="Start Maestro" onClick={this.props.startGame}>Start Maestro!</button>
-          </div>
+            className="add-player-button btn btn-secondary btn-round" title="Add player"
+            onClick={props.addPlayer}
+          >
+            <FontAwesomeIcon icon={faPlus} />
+          </button>
+          <button className="start-game-button btn btn-success" title="Start Maestro" onClick={props.startGame}>Start Maestro!</button>
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 Setup.propTypes = {

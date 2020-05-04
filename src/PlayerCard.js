@@ -3,7 +3,7 @@ import ScaleText from "react-scale-text";
 import './PlayerCard.css';
 
 // The white card containing the player's name and number
-function PlayerCard(props) {
+const playerCard = (props) => {
   let cardCSS = 'player-card';
   if (props.isEliminated) cardCSS = 'player-card eliminated';
   else if (props.isSelected) cardCSS = 'player-card selected';
@@ -37,4 +37,4 @@ function PlayerCard(props) {
   )
 }
 
-export default PlayerCard;
+export default playerCard;

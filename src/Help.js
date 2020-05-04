@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faArrowRight, faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 
 
-function Help(props) {
+const help = (props) => {
   return(
     <div className="help-panel">
       <h3>Help</h3>
@@ -40,11 +40,9 @@ function Help(props) {
 					<td><span className="help-key">?</span></td>
 					<td>Show/hide Help panel</td>
 				</tr>
-
-
       </table>
     </div>
   )
 }
 
-export default Help;
+export default help;

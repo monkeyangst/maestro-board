@@ -3,7 +3,7 @@ import {Row, Col} from 'react-bootstrap';
 import PlayerCard from './PlayerCard';
 import './Player.scss';
 
-function Player(props) {
+const player = (props) => {
   return (
     <Row>
       <Col xs={12} className="player-track">
@@ -15,4 +15,4 @@ function Player(props) {
   )
 }
 
-export default Player;
+export default player;

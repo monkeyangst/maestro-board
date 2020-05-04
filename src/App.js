@@ -2,7 +2,7 @@ import React from 'react';
 import GameBoard from './GameBoard';
 import './App.scss';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <GameBoard />
