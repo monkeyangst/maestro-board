@@ -39,7 +39,7 @@ class GameBoard extends Component {
         helpActive: true
       }
 
-    this.scoreChange = this.scoreChange.bind(this);
+    // this.scoreChange = this.scoreChange.bind(this);
     this.checkPlayer = this.checkPlayer.bind(this);
     this.addToChecked = this.addToChecked.bind(this);
     this.uncheckAll = this.uncheckAll.bind(this);
@@ -174,15 +174,15 @@ class GameBoard extends Component {
 
   }
 
-  scoreChange(e,playerNum) {
-    const newScore = e.target.value;
-    if ( newScore > 25 ) return;
-    const players = this.state.players.map( (player, i) => {
-      if (playerNum === player.number) player.score = newScore;
-      return player;
-    })
-    this.setState({players});
-  }
+  // scoreChange(e,playerNum) {
+  //   const newScore = e.target.value;
+  //   if ( newScore > 25 ) return;
+  //   const players = this.state.players.map( (player, i) => {
+  //     if (playerNum === player.number) player.score = newScore;
+  //     return player;
+  //   })
+  //   this.setState({players});
+  // }
 
   checkPlayer(e, playerNum) {
     const players = this.state.players.map( (player, i) => {
@@ -196,11 +196,12 @@ class GameBoard extends Component {
 
   addToChecked(howMany) {
     const players = this.state.players.map( (player) => {
-      const originalScore = player.score;
-      if ( player.isChecked && !player.isEliminated && player.score < 25 ) {
+      //const originalScore = player.score;
+      if ( player.isChecked && !player.isEliminated ) {
         player.score += howMany;
-        // but if we have made score below zero or above 25, screw it
-        if (player.score > 25 || player.score < 0) player.score = originalScore;
+        // but if we have made score below zero or above 25, cap it at those
+        if (player.score > 25 ) player.score = 25;
+        else if (player.score < 0) player.score = 0;
       }
       return player;
     });
@@ -230,7 +231,7 @@ class GameBoard extends Component {
       number={player.number}
       name={player.name}
       score={player.score}
-      updateScore={this.scoreChange}
+      // updateScore={this.scoreChange}
       checkPlayer={this.checkPlayer}
       isChecked={player.isChecked}
       isEliminated={player.isEliminated}

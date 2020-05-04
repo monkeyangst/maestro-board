@@ -15,7 +15,7 @@ function PlayerCard(props) {
       <div className="player-number">
         {props.number}
       </div>
-      <div className="player-name">
+      <div className="player-name"  title={props.score}>
         <ScaleText maxFontSize={24}>
 
             {props.name}
