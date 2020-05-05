@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Titan+One&family=Open+Sans&display=swap');
+
+
 body, html, #root {
   margin: 0;
   padding: 0;
   height: 100%;
   background-color: #000000;
-  font-family: Helvetica, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
   }
 
 code {
