@@ -35,7 +35,6 @@ const PlayerEntry = (props) => {
 
 const Setup = (props) => {
   let howManyPlayers = props.players.length;
-  console.log(howManyPlayers + ' players');
   const playerList = props.players.map((player,i) => (
     <PlayerEntry key={player.number} name={player.name} number={player.number} namePlayer={props.namePlayer} addPlayer={props.addPlayer} removePlayer={props.removePlayer} isLast={(player.number === howManyPlayers) ? true : false}/>
   ))

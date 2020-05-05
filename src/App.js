@@ -2,7 +2,7 @@ import React from 'react';
 import GameBoard from './GameBoard';
 import './App.scss';
 
-const App = () => {
+const app = () => {
   return (
     <div className="App">
       <GameBoard />
@@ -10,4 +10,4 @@ const App = () => {
   );
 }
 
-export default App;
+export default app;
