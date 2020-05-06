@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
-import GameBoard from './GameBoard.js';
+import GameBoard from './GameBoard/GameBoard.js';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(

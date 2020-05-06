@@ -1,6 +1,6 @@
 import React from 'react';
 import {Row, Col} from 'react-bootstrap';
-import PlayerCard from './PlayerCard';
+import PlayerCard from '../PlayerCard/PlayerCard';
 import './Player.scss';
 
 const player = (props) => {

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Player from './Player';
+import Player from '../Player/Player';
 import {Row, Col} from 'react-bootstrap';
 import './GameBoard.css';
-import Setup from './Setup';
-import Help from './Help';
+import Setup from '../Setup/Setup';
+import Help from '../Help/Help';
 
 class GameBoard extends Component {
 
