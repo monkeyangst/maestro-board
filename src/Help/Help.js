@@ -1,5 +1,5 @@
 import React from 'react';
-import './Help.scss';
+import './Help.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faArrowRight, faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 
