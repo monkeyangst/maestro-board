@@ -42,3 +42,8 @@ table.key-commands td:first-child {
   width: .7em;
 }
 
+.version {
+  font-size: .75em;
+  float:right;
+  opacity: .5;
+}

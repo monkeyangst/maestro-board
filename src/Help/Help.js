@@ -43,6 +43,7 @@ const help = (props) => {
         				</tr>
         </tbody>
       </table>
+			<div className="version">Version {props.version}</div>
     </div>
   )
 }

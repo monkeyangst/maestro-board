@@ -5,6 +5,8 @@ import './GameBoard.css';
 import Setup from '../Setup/Setup';
 import Help from '../Help/Help';
 
+const VERSION = '1.0.0';
+
 class GameBoard extends Component {
 
   // Set up state for gameboard
@@ -235,7 +237,7 @@ class GameBoard extends Component {
                 <Setup players={this.state.players} namePlayer={this.namePlayer} addPlayer={this.addPlayer} removePlayer={this.removePlayer} startGame={this.startGame} />
               : null }
             { this.state.helpActive ? 
-              <Help/>
+              <Help version={VERSION}/>
               :
               null
             }
