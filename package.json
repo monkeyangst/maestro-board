@@ -10,10 +10,13 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "bootstrap": "^4.4.1",
+    "i18next": "^19.4.4",
+    "i18next-browser-languagedetector": "^4.1.1",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
+    "react-i18next": "^11.4.0",
     "react-scale-text": "^1.2.2",
     "react-scripts": "3.4.1"
   },

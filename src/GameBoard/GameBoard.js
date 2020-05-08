@@ -4,13 +4,16 @@ import {Row, Col} from 'react-bootstrap';
 import './GameBoard.css';
 import Setup from '../Setup/Setup';
 import Help from '../Help/Help';
+import flooble from '../i18n';
 
-const VERSION = '1.1.0';
+
+const VERSION = '1.2.0';
 
 class GameBoard extends Component {
 
   // Set up state for gameboard
   constructor(props) {
+    console.log('CONSTRUCTOR');
     super(props);
       this.state = this.initialSetup();
 
@@ -19,24 +22,12 @@ class GameBoard extends Component {
         let item = JSON.parse(persistentState);
         this.state = item;
       }
-
-
-
-// I don't think these binds are necessary after switching to arrow functions, but leaving them in for a few versions just in case.
-    // this.scoreChange = this.scoreChange.bind(this);
-    //this.checkPlayer = this.checkPlayer.bind(this);
-    //this.addToChecked = this.addToChecked.bind(this);
-    //this.uncheckAll = this.uncheckAll.bind(this);
-    //this.eliminateChecked = this.eliminateChecked.bind(this);
-    // this.namePlayer = this.namePlayer.bind(this);
-    // this.addPlayer = this.addPlayer.bind(this);
-    // this.removePlayer = this.removePlayer.bind(this);
-    // // this.toggleControls = this.toggleControls.bind(this);
-    // // this.handleKeyPress = this.handleKeyPress.bind(this);
-    // this.startGame = this.startGame.bind(this);
   }
 
+
   initialSetup = () => {
+    const currentLang = flooble.language;
+    console.log('CURRENT LANG: ' + currentLang)
     const players = [];
     for ( let i = 1; i < 13; i++) {
       players.push({
@@ -51,7 +42,8 @@ class GameBoard extends Component {
       players,
       showControls: false,
       gameRunning: false,
-      helpActive: true
+      helpActive: true,
+      lang: currentLang
     });
   }
 
@@ -112,7 +104,6 @@ class GameBoard extends Component {
   }
   componentDidMount = () => {
     document.addEventListener("keyup", this.handleKeyPress, false);
-
   }
 
   static getDerivedStateFromProps = (props,state) => {
@@ -212,7 +203,14 @@ class GameBoard extends Component {
     this.setState({players});
   }
 
+  changeLangHandler = (e) => {
+    console.log(e.target.value);
+    flooble.changeLanguage(e.target.value);
+    this.setState({lang: e.target.value});
+  } 
+
   render() {
+
     const players = this.state.players.map((player) => (
       <Player
       key={player.number}
@@ -249,7 +247,7 @@ class GameBoard extends Component {
                 {players}
               </div>
               { !this.state.gameRunning ? 
-                <Setup players={this.state.players} namePlayer={this.namePlayer} addPlayer={this.addPlayer} removePlayer={this.removePlayer} startGame={this.startGame} resetGame={this.resetGame} />
+                <Setup players={this.state.players} namePlayer={this.namePlayer} addPlayer={this.addPlayer} removePlayer={this.removePlayer} startGame={this.startGame} resetGame={this.resetGame} changeLang={this.changeLangHandler} lang={this.state.lang} />
               : null }
             { this.state.helpActive ? 
               <Help version={VERSION}/>
