@@ -23,6 +23,7 @@ i18n
           "Show Player Setup panel": "Show Player Setup panel",
           "Show/hide Help panel": "Show/hide Help panel",
           "Reset": "Reset",
+          "Start Maestro!": "Start Maestro!",
           "Are you sure you want to clear all player names and reset all scores to zero?": "EN: Are you sure you want to clear all player names and reset all scores to zero?"
         }
       },
@@ -41,6 +42,7 @@ i18n
           "Show Player Setup panel": "Show Player Setup panel",
           "Show/hide Help panel": "Hilfe zeigen/verstecken",
           "Reset": "Zurücksetzen",
+          "Start Maestro!": "Maestro beginnen!",
           "Are you sure you want to clear all player names and reset all scores to zero?": "Möchten Sie wirklich alle Spielernamen löschen und alle Punkte auf Null zurücksetzen?"
         }
       }
