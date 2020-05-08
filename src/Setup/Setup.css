@@ -36,6 +36,10 @@
   margin-left: 4px;
 }
 
+.reset-game-button {
+  margin-left: 10px;
+}
+
 .start-game-button {
   margin-right: 0;
   margin-left: auto;

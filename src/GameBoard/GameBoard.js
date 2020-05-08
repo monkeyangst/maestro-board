@@ -5,39 +5,22 @@ import './GameBoard.css';
 import Setup from '../Setup/Setup';
 import Help from '../Help/Help';
 
-const VERSION = '1.0.0';
+const VERSION = '1.1.0';
 
 class GameBoard extends Component {
 
   // Set up state for gameboard
   constructor(props) {
     super(props);
+      this.state = this.initialSetup();
 
-    const players = [];
-    for ( let i = 1; i < 13; i++) {
-      players.push({
-        name: '',
-        number: i,
-        score: 0,
-        isEliminated: false,
-        isChecked: false
-      })
-    }
-
-      // const players = [{
-      //     name: '',
-      //     number: 1,
-      //     score: 0,
-      //     isEliminated: false,
-      //     isChecked: false
-      //   }]
-
-      this.state = {
-        players,
-        showControls: false,
-        gameRunning: false,
-        helpActive: true
+      if (sessionStorage.length > 0 ) {
+        let persistentState = sessionStorage.getItem('maestroState');
+        let item = JSON.parse(persistentState);
+        this.state = item;
       }
+
+
 
 // I don't think these binds are necessary after switching to arrow functions, but leaving them in for a few versions just in case.
     // this.scoreChange = this.scoreChange.bind(this);
@@ -52,6 +35,26 @@ class GameBoard extends Component {
     // // this.handleKeyPress = this.handleKeyPress.bind(this);
     // this.startGame = this.startGame.bind(this);
   }
+
+  initialSetup = () => {
+    const players = [];
+    for ( let i = 1; i < 13; i++) {
+      players.push({
+        name: '',
+        number: i,
+        score: 0,
+        isEliminated: false,
+        isChecked: false
+      })
+    }
+    return({
+      players,
+      showControls: false,
+      gameRunning: false,
+      helpActive: true
+    });
+  }
+
 
   handleKeyPress = (event) => {
     if (event.key === "?") {
@@ -109,10 +112,22 @@ class GameBoard extends Component {
   }
   componentDidMount = () => {
     document.addEventListener("keyup", this.handleKeyPress, false);
+
+  }
+
+  static getDerivedStateFromProps = (props,state) => {
+    let persistentState = JSON.stringify(state);
+    sessionStorage.setItem('maestroState', persistentState)
+    return null;
   }
 
   startGame = () => {
     this.setState({ gameRunning: true, helpActive: false });
+  }
+  
+  resetGame = () => {
+    let answer = window.confirm('Are you sure you want to clear all player names and reset all scores to zero?');
+    if (answer) this.setState(this.initialSetup());
   }
 
   addPlayer = () => {
@@ -234,7 +249,7 @@ class GameBoard extends Component {
                 {players}
               </div>
               { !this.state.gameRunning ? 
-                <Setup players={this.state.players} namePlayer={this.namePlayer} addPlayer={this.addPlayer} removePlayer={this.removePlayer} startGame={this.startGame} />
+                <Setup players={this.state.players} namePlayer={this.namePlayer} addPlayer={this.addPlayer} removePlayer={this.removePlayer} startGame={this.startGame} resetGame={this.resetGame} />
               : null }
             { this.state.helpActive ? 
               <Help version={VERSION}/>

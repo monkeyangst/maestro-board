@@ -57,6 +57,7 @@ const Setup = (props) => {
           >
             <FontAwesomeIcon icon={faPlus} />
           </button>
+          <button className="reset-game-button btn btn-danger" title="Reset Game" onClick={props.resetGame}>Reset</button>
           <button className="start-game-button btn btn-success" title="Start Maestro" onClick={props.startGame}>Start Maestro!</button>
         </div>
       </div>
