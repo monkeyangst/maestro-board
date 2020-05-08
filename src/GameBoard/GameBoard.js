@@ -4,7 +4,7 @@ import {Row, Col} from 'react-bootstrap';
 import './GameBoard.css';
 import Setup from '../Setup/Setup';
 import Help from '../Help/Help';
-import flooble from '../i18n';
+import i18n from '../i18n';
 
 
 const VERSION = '1.2.0';
@@ -24,9 +24,9 @@ class GameBoard extends Component {
       }
   }
 
-
+  // Called by constructor, fills state and sets initial language
   initialSetup = () => {
-    const currentLang = flooble.language;
+    const currentLang = i18n.language;
     console.log('CURRENT LANG: ' + currentLang)
     const players = [];
     for ( let i = 1; i < 13; i++) {
@@ -205,7 +205,7 @@ class GameBoard extends Component {
 
   changeLangHandler = (e) => {
     console.log(e.target.value);
-    flooble.changeLanguage(e.target.value);
+    i18n.changeLanguage(e.target.value);
     this.setState({lang: e.target.value});
   } 
 

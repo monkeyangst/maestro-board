@@ -15,7 +15,15 @@ i18n
           "Help": "Help",
           "Select players by clicking their names. Assign points using key commands below.": "Select players by clicking their names. Assign points using key commands below.",
           "Accidentally eliminated players can be reinstated by reselecting their name.":"Accidentally eliminated players can be reinstated by reselecting their name.",
-          "Assign score to selected players": "Assign score to selected players"
+          "Assign score to selected players": "Assign score to selected players",
+          "Give one point to selected players": "Give one point to selected players",
+          "Remove one point from selected players": "Remove one point from selected players",
+          "Unselect all players": "Unselect all players",
+          "Eliminate selected players": "Eliminate selected players",
+          "Show Player Setup panel": "Show Player Setup panel",
+          "Show/hide Help panel": "Show/hide Help panel",
+          "Reset": "Reset",
+          "Are you sure you want to clear all player names and reset all scores to zero?": "EN: Are you sure you want to clear all player names and reset all scores to zero?"
         }
       },
       de: {
@@ -25,13 +33,15 @@ i18n
           "Help": "Hilfe",
           "Select players by clicking their names. Assign points using key commands below.":"Klick auf einen Namen, um Spieler*innena auszuwählen. Punkte werden über die Tastenkombinationen unten zugewiesen.",
           "Accidentally eliminated players can be reinstated by reselecting their name.":"Versehentlich eliminierte Spieler*innen können durch erneutes Auswählen des Namens wieder eingesetzt werden.",
-          "Assign score to selected players": "Weise ausgewählten Spieler*innen Punkte zu.",
-          "Give one point to selected players": "Weise ausgewählten Spieler*innen je einen Punkt zu",
-          "Remove one point from selected players": "Ziehe ausgewählten Spieler*innen je einen Punkt ab",
-          "Unselect all players": "Auswahl aller Spieler*innen aufheben",
-          "Eliminate selected players": "Ausgewählte Spieler*innen eliminieren",
-          "Show Player Setup panel": "Zeige Spieler*innenliste",
-          "Show/hide Help panel": "Hilfe zeigen/verstecken"
+          "Assign score to selected players": "Assign score to selected players",
+          "Give one point to selected players": "Give one point to selected players",
+          "Remove one point from selected players": "Remove one point from selected players",
+          "Unselect all players": "Unselect all players",
+          "Eliminate selected players": "Eliminate selected players",
+          "Show Player Setup panel": "Show Player Setup panel",
+          "Show/hide Help panel": "Hilfe zeigen/verstecken",
+          "Reset": "Zurücksetzen",
+          "Are you sure you want to clear all player names and reset all scores to zero?": "Möchten Sie wirklich alle Spielernamen löschen und alle Punkte auf Null zurücksetzen?"
         }
       }
     },
