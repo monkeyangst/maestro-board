@@ -117,8 +117,7 @@ class GameBoard extends Component {
   }
   
   resetGame = () => {
-    let answer = window.confirm('Are you sure you want to clear all player names and reset all scores to zero?');
-    if (answer) this.setState(this.initialSetup());
+    this.setState(this.initialSetup());
   }
 
   addPlayer = () => {
@@ -165,9 +164,11 @@ class GameBoard extends Component {
 
   checkPlayer = (e, playerNum) => {
     const players = this.state.players.map( (player, i) => {
-      if (playerNum === player.number) player.isChecked = !player.isChecked;
-      if (player.isEliminated) player.isEliminated = false;
-      return player;
+      if (playerNum === player.number) {
+        player.isChecked = !player.isChecked;
+        if (player.isEliminated) player.isEliminated = false;
+       }
+     return player;
     })
 
     this.setState({players});

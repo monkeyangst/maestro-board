@@ -8,6 +8,11 @@ import './Setup.css';
 import LanguagePicker from '../LanguagePicker/LanguagePicker'
 import { useTranslation } from 'react-i18next';
 
+const resetGameDialog = (resetGameFunction, confirmationText) => {
+  let answer = window.confirm(confirmationText);
+  if (answer) resetGameFunction();
+}
+
 
 const PlayerEntry = (props) => {
   const { t } = useTranslation();
@@ -40,7 +45,7 @@ const PlayerEntry = (props) => {
 
 const Setup = (props) => {
   const { t, i18n } = useTranslation();
-
+  const confirmationText = t('Are you sure you want to clear all player names and reset all scores to zero?');
   console.dir(i18n);
   let howManyPlayers = props.players.length;
   const playerList = props.players.map((player,i) => (
@@ -48,6 +53,7 @@ const Setup = (props) => {
   ))
   return (
     <div className="setup-panel">
+      <LanguagePicker currentLang={props.lang} change={props.changeLang} />
       <h3>{t("Player Setup")}</h3>
       <div className="player-entry">
         {playerList}
@@ -64,10 +70,9 @@ const Setup = (props) => {
           >
             <FontAwesomeIcon icon={faPlus} />
           </button>
-          <button className="reset-game-button btn btn-danger" title="Reset Game" onClick={props.resetGame}>{t("Reset")}</button>
+          <button className="reset-game-button btn btn-danger" title="Reset Game" onClick={() => resetGameDialog(props.resetGame,confirmationText)}>{t("Reset")}</button>
           <button className="start-game-button btn btn-success" title="Start Maestro" onClick={props.startGame}>{t("Start Maestro!")}</button>
         </div>
-        <LanguagePicker currentLang={props.lang} change={props.changeLang} />
       </div>
     </div>
   )
