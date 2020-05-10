@@ -109,7 +109,7 @@ class GameBoard extends Component {
   static getDerivedStateFromProps = (props,state) => {
     let persistentState = JSON.stringify(state);
     sessionStorage.setItem('maestroState', persistentState)
-    return null;
+    return state;
   }
 
   startGame = () => {
