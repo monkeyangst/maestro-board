@@ -7,8 +7,9 @@ const playerCard = (props) => {
   let cardCSS = 'player-card';
   if (props.isEliminated) cardCSS = 'player-card eliminated';
   else if (props.isSelected) cardCSS = 'player-card selected';
+  let totalPoints = props.rounds * 5;
   const style = {
-    marginLeft: 'calc((100%/25*' + props.score + ') - 200px)'
+    marginLeft: 'calc((100%/' + totalPoints + '*' + props.score + ') - 200px)'
   }
   return(
     <div className={cardCSS} style={style} onClick={(e) => props.checkPlayer(e, props.number)}>
@@ -20,19 +21,7 @@ const playerCard = (props) => {
 
             {props.name}
             </ScaleText>
-
-          {/* <input
-            className="player-name-field"
-            placeholder="type name"
-            type="text"
-            value={props.name}
-            onChange={(e) => props.namePlayer(e, props.number)}
-          /> */}
         </div>
-
-      {/* <span className="player-score">
-        {props.score}
-      </span> */}
     </div>
   )
 }

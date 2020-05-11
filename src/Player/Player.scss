@@ -7,7 +7,7 @@ $five-fifth: calc(100%);
 $one-point: calc(100% / 25);
 
 
-@mixin flooble {
+@mixin flooble($rounds: 5) {
   $stripes: ();
   $color: Red;
   @for $i from 1 through 5 {
@@ -16,8 +16,8 @@ $one-point: calc(100% / 25);
     } @else {
       $color: #cccccc;
     }
-    $test3: calc(#{$i} * (100% / 25) - 2px);
-    $test4: calc(#{$i} * (100% / 25));
+    $test3: calc(#{$i} * (100% / (5 * #{$rounds})) - 2px);
+    $test4: calc(#{$i} * (100% / (5 * #{$rounds})));
   
     $stripes: append($stripes, transparent, comma);
     $stripes: append($stripes, transparent $test3, comma);
@@ -37,8 +37,21 @@ $one-point: calc(100% / 25);
 .board-bg {
   width: 100%;
   height: 50px;
-  @include flooble;
-  
+}
+.game-board.rounds-4 .board-bg {
+  @include flooble(4);
+}
+.game-board.rounds-5 .board-bg {
+  @include flooble(5);
+}
+.game-board.rounds-6 .board-bg {
+  @include flooble(6);
+}
+.game-board.rounds-7 .board-bg {
+  @include flooble(7);
+}
+.game-board.rounds-8 .board-bg {
+  @include flooble(8);
 }
 
 .score-input {

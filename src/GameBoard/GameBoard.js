@@ -13,10 +13,10 @@ class GameBoard extends Component {
 
   // Set up state for gameboard
   constructor(props) {
-    console.log('CONSTRUCTOR');
     super(props);
       this.state = this.initialSetup();
 
+      // Get current session info, in case of reload
       if (sessionStorage.length > 0 ) {
         let persistentState = sessionStorage.getItem('maestroState');
         let item = JSON.parse(persistentState);
@@ -27,7 +27,6 @@ class GameBoard extends Component {
   // Called by constructor, fills state and sets initial language
   initialSetup = () => {
     const currentLang = i18n.language;
-    console.log('CURRENT LANG: ' + currentLang)
     const players = [];
     for ( let i = 1; i < 13; i++) {
       players.push({
@@ -43,10 +42,10 @@ class GameBoard extends Component {
       showControls: false,
       gameRunning: false,
       helpActive: true,
-      lang: currentLang
+      lang: currentLang,
+      rounds: 4
     });
   }
-
 
   handleKeyPress = (event) => {
     if (event.key === "?") {
@@ -100,10 +99,15 @@ class GameBoard extends Component {
       // U key pressed -- uncheck everyone
       this.uncheckAll();
     }
-
   }
+
   componentDidMount = () => {
     document.addEventListener("keyup", this.handleKeyPress, false);
+  }
+
+  componentDidUpdate = () => {
+    // console.log('[GameBoard.js] componentDidUpdate');
+
   }
 
   static getDerivedStateFromProps = (props,state) => {
@@ -152,17 +156,7 @@ class GameBoard extends Component {
 
   }
 
-  // scoreChange(e,playerNum) {
-  //   const newScore = e.target.value;
-  //   if ( newScore > 25 ) return;
-  //   const players = this.state.players.map( (player, i) => {
-  //     if (playerNum === player.number) player.score = newScore;
-  //     return player;
-  //   })
-  //   this.setState({players});
-  // }
-
-  checkPlayer = (e, playerNum) => {
+   checkPlayer = (e, playerNum) => {
     const players = this.state.players.map( (player, i) => {
       if (playerNum === player.number) {
         player.isChecked = !player.isChecked;
@@ -175,17 +169,25 @@ class GameBoard extends Component {
   }
 
   addToChecked = (howMany) => {
+    let numRounds = this.state.rounds;
+    let maxPoints = numRounds * 5;
+    let addRound = 0;
+
     const players = this.state.players.map( (player) => {
-      //const originalScore = player.score;
+
       if ( player.isChecked && !player.isEliminated ) {
         player.score += howMany;
-        // but if we have made score below zero or above 25, cap it at those
-        if (player.score > 25 ) player.score = 25;
-        else if (player.score < 0) player.score = 0;
+        // If we have gone below zero, leave it at zero.
+        if (player.score < 0) player.score = 0;
+        // If this player's score has exceeded the maximum points for the number of rounds on the board, add a round.
+        if (player.score > maxPoints) {
+          addRound = 1;
+        }
+
       }
       return player;
     });
-    this.setState({players});
+    this.setState({players, rounds: ((addRound !== 0) ? numRounds+addRound : numRounds)});
   }
 
   eliminateChecked = () => {
@@ -205,13 +207,11 @@ class GameBoard extends Component {
   }
 
   changeLangHandler = (e) => {
-    console.log(e.target.value);
     i18n.changeLanguage(e.target.value);
     this.setState({lang: e.target.value});
   } 
 
   render() {
-
     const players = this.state.players.map((player) => (
       <Player
       key={player.number}
@@ -223,12 +223,22 @@ class GameBoard extends Component {
       isChecked={player.isChecked}
       isEliminated={player.isEliminated}
       namePlayer={this.namePlayer}
+      rounds={this.state.rounds}
       />
     ))
 
+    const numberMarkers = () => {
+      let output = [];
+      for ( let i = 1; i <= this.state.rounds; i++) {
+        let x = i * 5;
+        output.push(<span key={i} className="number-marker">{x}</span>
+        )
+      }
+      return output;
+    }
 
     return (
-      <div className="game-board">
+      <div className={'game-board rounds-' + this.state.rounds}>
         <Row>
           <Col xs={1}>
             <div className="title">
@@ -238,11 +248,12 @@ class GameBoard extends Component {
           <Col xs={11}>
               <div>
                   <div className="number-markers">
-                    <span className="number-marker">5</span>
+                    {/* <span className="number-marker">5</span>
                     <span className="number-marker">10</span>
                     <span className="number-marker">15</span>
                     <span className="number-marker">20</span>
-                    <span className="number-marker">25</span>
+                    <span className="number-marker">25</span> */}
+                    {numberMarkers()}
                   </div>
   
                 {players}
