@@ -7,7 +7,7 @@ import Help from '../Help/Help';
 import i18n from '../i18n';
 
 
-const VERSION = '1.2.0';
+const VERSION = '1.2.1';
 
 class GameBoard extends Component {
 
