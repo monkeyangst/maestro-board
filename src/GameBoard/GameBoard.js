@@ -60,6 +60,16 @@ class GameBoard extends Component {
       // LEFT arrow key -- subtract one point from checked players
       this.addToChecked(-1);
     } 
+    else if (event.keyCode === 38) {
+      // UP arrow key - add rounds to the board
+      let currentRounds = this.state.rounds;
+      this.setState({rounds: currentRounds+1});
+    }
+    else if (event.keyCode === 40) {
+      // DOWN arrow key - add rounds to the board
+      let currentRounds = this.state.rounds;
+      if (currentRounds > 4) this.setState({rounds: currentRounds-1});
+    }
     else if (event.keyCode === 49) {
       // Number key 1 pressed -- add one point and then uncheck everyone
       this.addToChecked(1);
