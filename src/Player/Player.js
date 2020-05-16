@@ -1,4 +1,4 @@
-import React, {Component, PureComponent} from 'react';
+import React, {Component} from 'react';
 import {Row, Col} from 'react-bootstrap';
 import PlayerCard from '../PlayerCard/PlayerCard';
 import './Player.scss';
@@ -16,9 +16,6 @@ class Player extends Component {
     else return true;
   }
 
-  componentDidUpdate() {
-    console.log('[Player.js] componentDidUpdate (Player ' + this.props.number + ')');
-  }
   render() {
     return (
       <Row>
