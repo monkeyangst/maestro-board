@@ -6,7 +6,6 @@ import Setup from '../Setup/Setup';
 import Help from '../Help/Help';
 import i18n from '../i18n';
 
-
 const VERSION = '1.2.1';
 
 class GameBoard extends Component {
@@ -14,14 +13,44 @@ class GameBoard extends Component {
   // Set up state for gameboard
   constructor(props) {
     super(props);
-      this.state = this.initialSetup();
+    this.state = this.initialSetup();
+    // const currentLang = i18n.language;
+    // const players = [];
+    // for ( let i = 1; i < 13; i++) {
+    //   players.push({
+    //     name: '',
+    //     number: i,
+    //     score: 0,
+    //     isEliminated: false,
+    //     isChecked: false
+    //   })
+    // }
+    // this.state = {
+    //   players,
+    //   showControls: false,
+    //   gameRunning: false,
+    //   helpActive: true,
+    //   lang: currentLang,
+    //   rounds: 4
+    // };
 
-      // Get current session info, in case of reload
-      if (sessionStorage.length > 0 ) {
-        let persistentState = sessionStorage.getItem('maestroState');
+
+    // Get current session info, in case of reload
+    if (sessionStorage.length > 0 ) {
+      let persistentState = sessionStorage.getItem('maestroState');
+      if (persistentState !== 'null') {
         let item = JSON.parse(persistentState);
         this.state = item;
       }
+    }
+  }
+
+  componentDidMount = () => {
+    document.addEventListener("keyup", this.keyPressHandler, false);
+  }
+
+  componentDidUpdate = () => {
+    // console.log('[GameBoard.js] componentDidUpdate');
   }
 
   // Called by constructor, fills state and sets initial language
@@ -47,84 +76,75 @@ class GameBoard extends Component {
     });
   }
 
-  handleKeyPress = (event) => {
-    if (event.key === "?") {
-      // ? pressed -- help system
-      this.setState({helpActive: !this.state.helpActive})
-    }
-    else if(event.keyCode === 39 || event.key === "+") {
-      // RIGHT arrow key -- add one point to checked players
-      this.addToChecked(1);
-    } 
-    else if (event.keyCode === 37 || event.key === "-") {
-      // LEFT arrow key -- subtract one point from checked players
-      this.addToChecked(-1);
-    } 
-    else if (event.keyCode === 38) {
-      // UP arrow key - add rounds to the board
-      let currentRounds = this.state.rounds;
-      this.setState({rounds: currentRounds+1});
-    }
-    else if (event.keyCode === 40) {
-      // DOWN arrow key - add rounds to the board
-      let currentRounds = this.state.rounds;
-      if (currentRounds > 4) this.setState({rounds: currentRounds-1});
-    }
-    else if (event.keyCode === 49) {
-      // Number key 1 pressed -- add one point and then uncheck everyone
-      this.addToChecked(1);
-      this.uncheckAll();
-    }
-    else if (event.keyCode === 50) {
-      // Number key 2 pressed -- add one point and then uncheck everyone
-      this.addToChecked(2);
-      this.uncheckAll();
-    }
-    else if (event.keyCode === 51) {
-      // Number key 3 pressed -- add one point and then uncheck everyone
-      this.addToChecked(3);
-      this.uncheckAll();
-    }
-    else if (event.keyCode === 52) {
-      // Number key 4 pressed -- add one point and then uncheck everyone
-      this.addToChecked(4);
-      this.uncheckAll();
-    }
-    else if (event.keyCode === 53) {
-      // Number key 5 pressed -- add one point and then uncheck everyone
-      this.addToChecked(5);
-      this.uncheckAll();
-    }
-    else if (event.keyCode === 69) {
-      // E key pressed -- eliminate selected players. Also, nice.
-      this.eliminateChecked();
-      this.uncheckAll();
-    }
-    else if (event.key === 's') {
-      // S key pressed -- enter setup mode again
-      this.setState({gameRunning: false});
-      this.uncheckAll();
-    }
-    else if (event.key === 'u') {
-      // U key pressed -- uncheck everyone
-      this.uncheckAll();
+  keyPressHandler = (event) => {
+    let currentRounds = this.state.rounds;
+    let key = event.key
+    switch(key) {
+      case "?":
+        // ? pressed -- help system
+        this.setState({helpActive: !this.state.helpActive})
+        break;
+      case "ArrowRight":
+      case "+":
+        // RIGHT arrow key -- add one point to checked players
+        this.addToChecked(1);
+        break;
+      case "ArrowLeft":
+      case "-":
+        // LEFT arrow key -- subtract one point from checked players
+        this.addToChecked(-1);
+        break;
+      case "ArrowUp":
+        // UP arrow key - add rounds to the board
+        this.setState({rounds: currentRounds+1});
+        break;
+      case "ArrowDown":
+        // DOWN arrow key - add rounds to the board
+        if (currentRounds > 4) this.setState({rounds: currentRounds-1});
+        break;
+      case "1":
+      case "2":
+      case "3":
+      case "4":
+      case "5":
+        // Number key pressed -- add proper number of points and then uncheck everyone
+        this.addToChecked(parseInt(key,10));
+        this.uncheckAll();
+        break;
+      case 'e':
+        // E key pressed -- eliminate selected players. Also, nice.
+        this.eliminateChecked();
+        this.uncheckAll();
+        break;
+      case 's':
+        // S key pressed -- enter setup mode again
+        this.setState({gameRunning: false});
+        this.uncheckAll();
+        break;
+      case 'u':
+        // U key pressed -- uncheck everyone
+        this.uncheckAll();
+        break;
+      case 'f':
+        // U key pressed -- uncheck everyone
+        alert(this.getLowestScore());
+        break;
+      default:
+        break;
+
     }
   }
 
-  componentDidMount = () => {
-    document.addEventListener("keyup", this.handleKeyPress, false);
+  // Return the lowest score on the board
+  getLowestScore = () => {
+    return [...this.state.players].sort((a,b) => (a.score > b.score) ? 1 : -1)[0].score;
   }
 
-  componentDidUpdate = () => {
-    // console.log('[GameBoard.js] componentDidUpdate');
-
-  }
-
-  static getDerivedStateFromProps = (props,state) => {
-    let persistentState = JSON.stringify(state);
-    sessionStorage.setItem('maestroState', persistentState)
-    return state;
-  }
+  // static getDerivedStateFromProps = (props,state) => {
+  //   let persistentState = JSON.stringify(state);
+  //   sessionStorage.setItem('maestroState', persistentState)
+  //   return state;
+  // }
 
   startGame = () => {
     this.setState({ gameRunning: true, helpActive: false });
@@ -222,6 +242,7 @@ class GameBoard extends Component {
   } 
 
   render() {
+    console.log(this.state);
     const players = this.state.players.map((player) => (
       <Player
       key={player.number}

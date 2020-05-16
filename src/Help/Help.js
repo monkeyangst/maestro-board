@@ -3,6 +3,7 @@ import './Help.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faArrowRight, faArrowLeft, faArrowUp, faArrowDown, faPlus, faMinus} from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 
 
 const Help = (props) => {
@@ -58,5 +59,10 @@ const Help = (props) => {
 		</div>
 		)
 	}
+
+	Help.propTypes = {
+		version: PropTypes.string
+	}
+
 	
 	export default Help;
