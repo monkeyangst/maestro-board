@@ -4,7 +4,7 @@ import {I18nextProvider} from 'react-i18next';
 import i18next from './i18n';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
-import GameBoard from './GameBoard/GameBoard.js';
+import GameBoard from './GameBoard/GameBoard';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
