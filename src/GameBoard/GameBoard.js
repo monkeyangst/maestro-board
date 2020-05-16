@@ -127,7 +127,7 @@ class GameBoard extends Component {
         break;
       case 'f':
         // U key pressed -- uncheck everyone
-        alert(this.getLowestScore());
+        // alert(this.getLowestScore());
         break;
       default:
         break;
@@ -242,7 +242,7 @@ class GameBoard extends Component {
   } 
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     const players = this.state.players.map((player) => (
       <Player
       key={player.number}
