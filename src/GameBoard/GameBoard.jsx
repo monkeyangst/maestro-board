@@ -72,7 +72,8 @@ class GameBoard extends Component {
       gameRunning: false,
       helpActive: true,
       lang: currentLang,
-      rounds: 4
+      rounds: 4,
+      justMoved: false
     });
   }
 
@@ -87,11 +88,13 @@ class GameBoard extends Component {
       case "ArrowRight":
       case "+":
         // RIGHT arrow key -- add one point to checked players
+        this.setState({justMoved: true})
         this.addToChecked(1);
         break;
       case "ArrowLeft":
       case "-":
         // LEFT arrow key -- subtract one point from checked players
+        this.setState({justMoved: true})
         this.addToChecked(-1);
         break;
       case "ArrowUp":
@@ -140,11 +143,11 @@ class GameBoard extends Component {
     return [...this.state.players].sort((a,b) => (a.score > b.score) ? 1 : -1)[0].score;
   }
 
-  // static getDerivedStateFromProps = (props,state) => {
-  //   let persistentState = JSON.stringify(state);
-  //   sessionStorage.setItem('maestroState', persistentState)
-  //   return state;
-  // }
+  static getDerivedStateFromProps = (props,state) => {
+    let persistentState = JSON.stringify(state);
+    sessionStorage.setItem('maestroState', persistentState)
+    return state;
+  }
 
   startGame = () => {
     this.setState({ gameRunning: true, helpActive: false });
@@ -186,7 +189,11 @@ class GameBoard extends Component {
 
   }
 
-   checkPlayer = (e, playerNum) => {
+   selectPlayer = (e, playerNum) => {
+     // First, did we just move another bunch of players? If so, uncheck all
+     if (this.state.justMoved) {
+       this.uncheckAll();
+     }
     const players = this.state.players.map( (player, i) => {
       if (playerNum === player.number) {
         player.isChecked = !player.isChecked;
@@ -195,7 +202,7 @@ class GameBoard extends Component {
      return player;
     })
 
-    this.setState({players});
+    this.setState({players, justMoved: false});
   }
 
   addToChecked = (howMany) => {
@@ -250,7 +257,7 @@ class GameBoard extends Component {
       name={player.name}
       score={player.score}
       // updateScore={this.scoreChange}
-      checkPlayer={this.checkPlayer}
+      checkPlayer={this.selectPlayer}
       isChecked={player.isChecked}
       isEliminated={player.isEliminated}
       namePlayer={this.namePlayer}
@@ -278,15 +285,15 @@ class GameBoard extends Component {
           </Col>
           <Col xs={11}>
               <div>
-                  <div className="number-markers">
-                    {/* <span className="number-marker">5</span>
-                    <span className="number-marker">10</span>
-                    <span className="number-marker">15</span>
-                    <span className="number-marker">20</span>
-                    <span className="number-marker">25</span> */}
-                    {numberMarkers()}
-                  </div>
-  
+                <div className="number-markers">
+                  {/* <span className="number-marker">5</span>
+                  <span className="number-marker">10</span>
+                  <span className="number-marker">15</span>
+                  <span className="number-marker">20</span>
+                  <span className="number-marker">25</span> */}
+                  {numberMarkers()}
+                </div>
+  Bishant1!
                 {players}
               </div>
               { !this.state.gameRunning ? 
