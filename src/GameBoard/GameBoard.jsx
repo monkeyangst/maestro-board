@@ -293,7 +293,6 @@ class GameBoard extends Component {
                   <span className="number-marker">25</span> */}
                   {numberMarkers()}
                 </div>
-  Bishant1!
                 {players}
               </div>
               { !this.state.gameRunning ? 
